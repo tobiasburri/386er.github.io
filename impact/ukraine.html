@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+	
+        <meta charset="utf-8">
+        <title>Map of Ukraine</title>	
+        <script type="text/javascript" src="d3/d3.v3.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+		<script type="text/javascript" src="../libraries/spin.js"></script>
+		<link rel="stylesheet" href="style.css">
+		
+		
+    </head>
+	
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	
+	<style>
+	
+	
+	
+    body {   
+			background-size:100% 100%;
+            height:1000px;
+			width:100%;
+			margin-right:0px;
+			margin-left:0px;
+			margin-bottom:0px;
+			margin-top:0px;
+			background-color:#EFF5FB;
+	        }
+	
+
+	#box {
+	       width:900px; 
+		   height:900px; 
+		   position:relative; 
+		   margin:auto; margin-bottom:0px; 
+		   margin-top:20px; 
+		   border:1px solid #BDBDBD; 
+		   border-radius: 8px; 
+		   background-color:white;
+	     }
+	
+			
+	#lightbox{	
+			width:100%;
+			height:100%;
+			position:absolute;
+			background-image:url('http://www.economicworldmap.net/images/bgwhite_box.png');
+			z-index:2000;
+			display:none;
+			margin-top:0px;
+			}
+    
+
+	#infotext{  height:250px;
+			width:450px;
+			position:absolute;
+			background-image:url('http://www.economicworldmap.net/images/bg_popup.png');
+			border:1px solid #989898;
+			z-index:2500;
+			display:none;
+			margin:auto;
+			top:25%;
+			left:38%;
+			padding:10px;
+			border-radius: 8px;}
+
+
+			
+
+	.subunit24{ 
+				opacity: 1;
+				fill: white;
+				stroke-dasharray: 2,2;
+		        stroke-linejoin: round;
+				stroke: #2E2E2E;						
+				}
+				
+	.about{  
+	
+	           position:absolute; 
+		       font-size:12px; 
+			   margin-top:2px; 
+			   font-weight:normal; 
+			   margin-left:20px; 
+			   z-index:1000; 
+			   text-decoration:none;'
+	}		
+	
+
+	
+				
+	.tooltip{	
+			    font-family:Lato;
+			    font-size:13px;		
+	         }	
+
+
+    .xaxis path,
+    .xaxis line {
+                fill: none;
+                stroke: grey;
+                shape-rendering: crispEdges;  
+	            color:grey;
+				}
+	.xaxis text {fill:grey;
+	             }			
+
+	a:link{color:grey; font-family: Lato;}
+	a:visited{color:grey; font-family: Lato;}
+	a:hover{color:orange;font-family: Lato;}
+				 
+	
+	</style>
+	
+	
+    <body>
+	
+	
+	
+	<div id="lightbox">
+  
+	</div>
+	
+	
+	
+	
+	<div id="infotext"> 
+	
+	<h2 style='font-family:Lato;color:#424242;'>about </h2>
+	
+	<p style='font-family:Lato;color:#424242;'> Visualisation of regional Statistics of Ukraine in 2012. The data was taken
+       from the site of the <a style='text-decoration:none;' href='http://ukrstat.org/en'>State Statistics Service of Ukraine</a> </p>
+	
+	</div> 
+
+	
+	
+	<div id='box'> 
+	
+	
+	<div style="position:absolute; margin-top:18px; font-size:45px; color:grey;font-weight:bold; font-family:Lato "> 
+	
+	<a class='about' href='#'> about </a>
+	<p style='margin: 0px; margin-left:375px'>Ukraine</p> 
+	<p style='margin:0px; margin-left:275px; text-align:center; font-size:15px; font-weight:normal;' >The spatial distribution of economic indicators in 2012</p> 
+	
+	
+	</div>
+	
+	
+	
+	<div id='header' style="width:900px; height:20px; position:relative; padding-left:65px; font-size:13px; padding-top:100px; color:grey; font-family:Lato; "> 
+	
+    <input type="Radio" name="map" id='none' class ='radio' value="none"  checked="checked" style='margin-left:8px;' />  None 
+	<input type="Radio" name="map" id='agr'  class ='radio' value="agr" /> Index of Agricultural Production
+	<input type="Radio" name="map" id='rep'  class ='radio' value="rep" /> Reproduction Rate
+	<input type="Radio" name="map" id='pop'  class ='radio' value="pop" /> Population
+	<input type="Radio" name="map" id='wgs'  class ='radio' value="wgs" /> Mean Wage
+    <input type="Radio" name="map" id='gdp'  class ='radio' value="gdp" /> GDP per Head
+	<input type="Radio" name="map" id='exp'  class ='radio' value="exp" /> Exports
+	
+	</div>
+	
+	
+	</div>
+	
+        <script type="text/javascript">
+		
+		var ind = 6;
+		
+	
+		
+		
+		var canvas = d3.select('#box')
+					   .append('svg')
+				       .attr('width', 950)
+				       .attr('height', 900)
+					  
+		
+		var div = d3.select("body").append("div")   
+					.attr("class", "tooltip")               
+					.style("opacity", 0)
+					.style('border','1px solid grey')
+					.style('width','140px')
+					.style('height','40px')
+					.style('padding-top','5px')
+					.style('position','absolute')
+					.style('background', '#F2F2F2')
+					.style('border-radius', '8px');
+					
+					
+		var divbar = d3.select("body").append("div")   
+					.attr("class", "tooltip")               
+					.style("opacity", 0)
+					.style('border','1px solid grey')
+					.style('width','140px')
+					.style('height','40px')
+					.style('padding-top','5px')
+					.style('position','absolute')
+					.style('background', '#F2F2F2')
+					.style('border-radius', '8px');			
+					
+
+		<!-- Infotext FadeIn&Out -->    
+		
+		$(document).ready(function(){
+			$(".about").click(function(){	 
+			$("#lightbox").fadeIn(650);
+			$("#infotext").fadeIn(650); 
+		});
+		
+		$("#lightbox").click(function(){
+			$("#lightbox").fadeOut(650);
+			$("#infotext").fadeOut(650);
+		});
+});
+ 
+		 
+		 	var 
+				spinnerOptions = {
+					'color': 'grey',
+					'width': 2
+				},
+				spinner = new Spinner(spinnerOptions),
+				target = $('#box');
+		
+			spinner.spin();
+			target.append(spinner.el);
+		 
+
+		
+		d3.json('ukrainenew2.geojson', function(data){
+	
+		
+			spinner.stop();
+			
+			var radio = d3.select('box')
+						  .append('input')
+						  .attr('type','Radio')
+						  .attr('id','peter')
+						  .attr('value','acr');
+						  
+		
+			var group = canvas.selectAll('g')
+					.data(data.features)
+					.enter()
+					.append('g')
+		
+			var projection = d3.geo.mercator().scale([2400]).translate([-850,2650]);
+			var path = d3.geo.path().projection(projection);
+			
+			
+	
+			var areas = group.append('path')
+						.attr('d',path)
+						.attr('class', function(d) { return "subunit" + d.id; })  
+						.attr('fill','steelblue')
+						.attr('stroke', 'white')
+						.attr('stroke-width', '1px')
+						.attr('opacity','0.8');
+
+					
+	
+			var ukrdata = [[],[],[],[],[],[],[]]; // Storing all the data into one array 
+			var bardata = [[],[],[],[],[],[],[]]; 
+			
+			
+            for (var i=0; i<group.data().length; i++)
+                  { 
+                  ukrdata[0].push(group.data()[i].properties.agricindx)
+				  bardata[0].push({'name':group.data()[i].properties.name, 'value':group.data()[i].properties.agricindx})
+				  ukrdata[1].push(group.data()[i].properties.reproduction)
+				  bardata[1].push({'name':group.data()[i].properties.name, 'value':group.data()[i].properties.reproduction})
+				  ukrdata[2].push(group.data()[i].properties.population)
+				  bardata[2].push({'name':group.data()[i].properties.name, 'value':group.data()[i].properties.population})
+				  ukrdata[3].push(group.data()[i].properties.regiongdp)
+				  bardata[3].push({'name':group.data()[i].properties.name, 'value':group.data()[i].properties.regiongdp})
+				  ukrdata[4].push(group.data()[i].properties.wages)
+				  bardata[4].push({'name':group.data()[i].properties.name, 'value':group.data()[i].properties.wages})
+				  ukrdata[5].push(group.data()[i].properties.exports)
+				  bardata[5].push({'name':group.data()[i].properties.name, 'value':group.data()[i].properties.exports})
+				  ukrdata[6].push('')
+                  };		
+			
+            var description = [' %','','',' UAH',' UAH',' USD',''];
+
+			
+            for (var i=0; i<bardata.length; i++) {
+			
+			bardata[i] = bardata[i].sort(function(a, b) {
+                     return b.value - a.value;
+                                                        });
+			
+			                                     }
+
+			
+
+			
+// Hover & Tooltip
+			areas.on("mouseover", function(d) {  
+							d3.select(this).transition().duration(200).style("opacity", 1);
+							div.transition().duration(300).style("opacity", 1)							
+							div.html('<span style="margin-bottom:10px; padding:0px;">' + d.properties.name + '</span> </br>' + '<p style="margin-top:3px; padding:2px;">' +ukrdata[ind][d.id] + description[ind] + '<p>' )
+							   .style("left", (d3.mouse(this)[0] + 330)  + "px")
+							   .style("top", (d3.mouse(this)[1] + 75)  + "px");
+							})
+							
+				 .on("mousemove", function(d) {													
+							div.html('<span style="margin-bottom:10px; padding:0px;">' + d.properties.name + '</span> </br>' + '<p style="margin-top:3px; padding:2px;">' +ukrdata[ind][d.id] + description[ind] + '<p>' )
+							   .style("left", (d3.mouse(this)[0] + 350) + "px")
+							   .style("top", (d3.mouse(this)[1] + 75)  + "px");
+									
+							})	
+														
+				 .on("mouseout", function(d) {
+							d3.select(this).transition().duration(200).style("opacity", 0.8);							
+							div.transition().duration(300).style("opacity", 0)							
+							});
+
+							
+
+			var minval = function(array){ return Math.min.apply(null, array)};
+			var maxval = function(array){ return Math.max.apply(null, array)};
+						
+// Farbskalen
+						
+			var colorScaleagr =   d3.scale.linear()
+									.domain([ minval(ukrdata[0]) ,maxval(ukrdata[0])])
+				                    .range(["yellow","red"]);
+																
+			var colorScalerep =   d3.scale.linear()
+									.domain([ minval(ukrdata[1]) , maxval(ukrdata[1]) ])
+				                    .range(["#DF0101","#3ADF00"]);											
+									
+			var colorScalepop =   d3.scale.linear()
+									.domain([ minval(ukrdata[2]) ,maxval(ukrdata[2])])
+				                    .range(["yellow","red"]);						
+			
+			var colorScalewgs =   d3.scale.linear()
+									.domain([ minval(ukrdata[4]) ,maxval(ukrdata[4])])
+				                    .range(["yellow","red"]);			
+						
+		    var colorScalegdp =   d3.scale.linear()
+								    .domain([ minval(ukrdata[3]) , maxval(ukrdata[3]) ])
+				                    .range(["yellow","red"]);
+			
+			var colorScaleexp =   d3.scale.linear()
+								    .domain([ minval(ukrdata[5]) , maxval(ukrdata[5]) ])
+				                    .range(["yellow","red"]);
+
+// Größenskalen
+
+			
+			
+			var widthScale = d3.scale.linear()
+						         .domain([0, 100])
+						         .range([0,800]);
+								  
+			var axis  = d3.svg.axis() 
+					         .ticks(6)
+					         .scale(widthScale);	
+			
+		
+			var initbardata = []
+			
+			for (var i = 0; i < 25; i++){initbardata.push(0)}
+			
+			
+			
+			var reprate = function(value) {   // postive/negative Werte für Array
+			
+										   if ( value >= 0 ) {
+										                      return 'green'
+										                     } 
+			                                else {
+											      return 'red'
+											     }
+			}
+			
+			
+			var maxarray = function (array) {   // Ermittlung des maximalen Absolutwertes in Array
+			
+											var value = 0
+											
+											for (var i=0; i<array.length; i++){
+											
+											if (Math.abs(array[i]) >= value) { value = Math.abs(array[i])}
+											
+											}
+											   return value										
+											};
+			
+	
+			
+			
+			var bars =	canvas.selectAll('rect')
+							  .data(initbardata)
+				              .enter()
+					              .append('rect')
+								  .attr('width', function(d) { return widthScale(d); })
+								  .attr('height', 4)
+								  .attr('fill', 'steelblue' )
+								  .attr('y', function(d,i){return i*5})
+								  .attr('transform', 'translate(50,615)');	
+															
+						canvas.append('g')
+								.attr('class','xaxis')
+								.attr('color','grey')
+								.attr('transform','translate(50,743)') 
+								.call(axis);	
+			
+	
+	
+	
+	        	bars.on("mouseover", function(d) {  
+							d3.select(this).transition().duration(100).style("opacity", 0.5);
+							divbar.transition().duration(300).style("opacity", 1)							
+							divbar.html('<span style="margin-bottom:10px; padding:0px;">' + d.name + '</span> </br>' + '<p style="margin-top:3px; padding:2px;">' + d.value  + '<p>' )
+							   .style("left", (d3.mouse(this)[0] + 400)  + "px")
+							   .style("top", (d3.mouse(this)[1] + 650)  + "px");
+							})
+							
+						.on("mousemove", function(d) {													
+							divbar.html('<span style="margin-bottom:10px; padding:0px;">' + d.name + '</span> </br>' + '<p style="margin-top:3px; padding:2px;">' + d.value + '<p>' )
+							   .style("left", (d3.mouse(this)[0] + 400) + "px")
+							   .style("top", (d3.mouse(this)[1] + 650)  + "px");
+									
+							})	
+														
+						.on("mouseout", function(d) {
+							d3.select(this).transition().duration(100).style("opacity", 1);							
+							divbar.transition().duration(300).style("opacity", 0)							
+							});
+
+
+			
+		    d3.selectAll('.radio').on('change', function(){
+			
+				if (document.getElementById('none').checked) {
+
+								areas.transition().duration(250)
+								     .attr('fill','steelblue');
+									
+								canvas.selectAll('rect')
+									 .data(initbardata)
+									    .transition().duration(250)
+										.attr('width', function(d) { return widthScale(d); })
+										.attr('fill', 'steelblue' );
+
+								widthScale.domain([0, 100]);
+														
+								canvas.select('.xaxis')
+									    .transition().duration(500)
+										.call(axis);	
+
+						 
+								ind = 6;}
+								
+				else if (document.getElementById('agr').checked) {
+
+								areas.transition().duration(250)
+								     .attr('fill', function(d){return colorScaleagr(d.properties.agricindx)});
+						
+							    widthScale.domain([0, Math.max.apply( null, ukrdata[0])]);	
+						
+				               canvas.selectAll('rect')
+									 .data(bardata[0])
+									    .transition().duration(250)
+										.attr('width', function(d) { return widthScale(d.value); })
+										.attr('fill', 'steelblue' );
+
+								
+								canvas.select(".xaxis")
+									  .transition().duration(500)  
+                                      .call(axis);  
+								 								 
+								ind = 0;}
+								 
+								 
+								 
+				else if (document.getElementById('rep').checked) {
+				
+								areas.transition().duration(250)
+								     .attr('fill', function(d){return colorScalerep(d.properties.reproduction)});
+								
+							    widthScale.domain([0, maxarray(ukrdata[1])]);
+														
+								canvas.selectAll('rect')
+									 .data(bardata[1])
+									    .transition().duration(250)
+										.attr('width', function(d) { return widthScale(Math.abs(d.value)); })
+										.attr('fill', function(d) {return reprate(d.value);});
+
+										
+								canvas.select(".xaxis")
+									  .transition().duration(500)  
+                                      .call(axis);  
+
+								ind = 1;}
+								
+		
+				
+				else if (document.getElementById('pop').checked) {
+
+								areas.transition().duration(250)
+								     .attr('fill', function(d){return colorScalepop(d.properties.population)});
+									 
+								
+							    widthScale.domain([0, Math.max.apply( null, ukrdata[2])]);		
+								
+								canvas.selectAll('rect')
+									 .data(bardata[2])
+									    .transition().duration(250)
+										.attr('width', function(d) { return widthScale(d.value); })
+										.attr('fill', 'steelblue' );
+									
+								canvas.select(".xaxis")
+									  .transition().duration(500)  
+                                      .call(axis);  	 
+	
+								ind = 2;}	
+								
+				else if (document.getElementById('wgs').checked) {
+
+								areas.transition().duration(250)
+								     .attr('fill', function(d){return colorScalewgs(d.properties.wages)});
+								
+							    widthScale.domain([0, Math.max.apply( null, ukrdata[4])]);		
+								
+								canvas.selectAll('rect')
+									 .data(bardata[4])
+									    .transition().duration(250)
+										.attr('width', function(d) { return widthScale(d.value); })
+										.attr('fill', 'steelblue' );
+									
+								canvas.select(".xaxis")
+									  .transition().duration(500)  
+                                      .call(axis);  
+
+								
+								ind = 4;}		
+								
+				else if (document.getElementById('gdp').checked) {
+
+								areas.transition().duration(250)
+								     .attr('fill', function(d){return colorScalegdp(d.properties.regiongdp)});
+									 
+								widthScale.domain([0, Math.max.apply( null, ukrdata[3])]);		
+								
+								canvas.selectAll('rect')
+									 .data(bardata[3])
+									    .transition().duration(250)
+										.attr('width', function(d) { return widthScale(d.value); })
+										.attr('fill', 'steelblue' );
+									
+								canvas.select(".xaxis")
+									  .transition().duration(500)  
+                                      .call(axis);  	 
+									 
+									 
+								ind = 3;}
+								
+				
+				else if (document.getElementById('exp').checked) {
+
+								areas.transition().duration(250)
+								     .attr('fill', function(d){return colorScaleexp(d.properties.exports)});
+									 
+								widthScale.domain([0, Math.max.apply( null, ukrdata[5])]);		
+								
+								canvas.selectAll('rect')
+									 .data(bardata[5])
+									    .transition().duration(250)
+										.attr('width', function(d) { return widthScale(d.value); })
+										.attr('fill', 'steelblue' );
+									
+								canvas.select(".xaxis")
+									  .transition().duration(500)  
+                                      .call(axis);  		 
+									 		 
+									 
+								ind = 5;} 
+																
+			});
+		  
+
+		
+		});
+			
+		</script> 
+		
+    </body>
+	
+</html>     

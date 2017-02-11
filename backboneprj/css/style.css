@@ -1,0 +1,78 @@
+body
+	{
+	width: 100%;
+	height: 100%;
+	background-size: 100% 100%;
+	margin: 0px
+	}
+
+#blogroll
+	{
+	width: 700px;
+	height: 700px;
+	border: 1px solid gray;
+	border-radius:5px;
+	position: relative;
+	margin: auto;
+	margin-top:50px;
+	padding-top: 50px;
+	padding-left: 50px;
+	overflow: auto;
+	font-family:Lato;
+	font-size:12px;
+	}
+
+.blogpost
+	{
+	font-size: 16px;
+	width:650px;
+	padding:4px;
+	border: 1px solid gray;
+	margin-bottom:10px;
+	overflow:hidden;
+	border-radius:5px;
+	font-family: Lato;
+	}
+	
+.auth
+	{
+	font-size: 14px;
+	}
+
+h1
+	{
+	font-family: "Times New Roman";
+	font-size:13px;
+	
+	}
+
+#form
+	{
+	width: 700px;
+	height: 300px;
+	position: relative;
+	margin: auto;
+	padding-top: 20px;
+	padding-left: 50px;
+	font-family:Lato;
+	font-size: 12px;
+	}
+
+input.input
+		{
+margin:5px;
+		
+		}
+	
+	
+button.delete, button.edit
+ {
+ 	height: 15px;
+ 	vertical-align: middle;
+ 	font-family: helvetica;
+ 	text-decoration: none;
+	font-size:10px;
+	font-family:Lato;
+ }
+
+

@@ -1,0 +1,638 @@
+
+<!DOCTYPE HTML> 
+<html dir="ltr" lang="en"
+xmlns:og="http://opengraphprotocol.org/schema/"
+xmlns:fb="http://www.facebook.com/2008/fbml">
+ 
+ 
+
+  <head>
+   
+	<link rel="icon" href="http://tobiasburri.de/wordpress/wp-content/themes/hyperborea/frontiericon.ico" type="image/x-icon">
+   
+	<!-- Meta data -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="language" content="de" />
+	<meta name="Description" content=" The map displayed on this site is a visualisation of criminal activity in the German capital. The data used to create it was taken from the Berlin Atlas of crime, a report biennially published by the police of the Federal State of Berlin, the last report to date taken in August 2012.">
+	<meta name="Keywords" content="crime, berlin, openlayers, crime map, visualisation, germany, heatmap, criminal activity, atlas of crime, crime data, crime statistics, crime report, robbery, mugging, theft, bicycle theft, Kriminalität, Berliner Kriminalitätsstatistik, Verbrechen">
+		
+		
+	<!-- Facebook Meta Data -->
+	<meta property="og:image" content="/images/atlas-preview.jpg"/>
+	<meta property="og:locality" content="Berlin"/>
+	<meta property="og:country-name" content="Germany"/>
+	<meta property="og:latitude" content="52.5234051"/>
+	<meta property="og:longitude" content="13.4113999"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:title" content="Berlin Atlas of Crime"/>
+	<meta property="og:url" content="http://www.economicworldmap.net/berlincrime.html/"/>
+	<meta property="og:site_name" content="economicworldmap.net/test.html"/>
+		
+		
+    <title>Berlin Atlas of Crime</title>
+	
+	<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+	<script type="text/javascript" src="/libraries/jquery.min.js"></script> 
+	<script type="text/javascript" src="/libraries/jquery-latest.js"></script> 
+	<script type="text/javascript" src="/libraries/OpenLayers.js"></script> 
+	<script type="text/javascript" src="/libraries/jquery.jscrollpane.min.js"></script> <!-- ScrollBar -->
+	<script type="text/javascript" src="/libraries/jquery.mousewheel.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	
+	<script>
+	
+	
+
+
+<!-- Scroll Bar Crime Statistics -->
+	
+$(function()
+{
+	$('#heatmap').jScrollPane();
+});
+
+
+<!-- Infotext FadeIn&Out -->    
+		
+$(document).ready(function(){
+	$(".about").click(function(){
+	$("#lightbox").fadeIn(650);
+    $("#infotext").fadeIn(650);
+	});
+	$("#lightbox").click(function(){
+    $("#lightbox").fadeOut(650);
+    $("#infotext").fadeOut(650);
+	});
+});
+
+		
+		
+		var crimeTypes=new Array(	"None",
+									"Population",
+									"Overall Crime",
+									"Robbery",
+									"Mugging",
+									"Assault",
+									"Molestation/Stalking",
+									"Theft",
+									"Car Theft",
+									"Bicycle Theft",
+									"Burglary",
+									"Arson",
+									"Property Damage",
+									"Drug Offenses");
+									
+<!-- Google Maps Styling -->
+									
+		var stylez = [
+					  {
+						"elementType": "labels",
+						"stylers": [
+						  { "visibility": "off" }
+						           ]
+					  },
+						  {
+							"stylers": [
+							  { "invert_lightness": true },
+							  { "hue": "#ff0000" },
+							  { "gamma": 0.65 },
+							  { "weight": 1.1 },
+							  { "saturation": -65 }
+							           ]
+						  }
+                     ];
+	
+	 var styledMapOptions = { 
+	                          name: "Styled Map"
+	                        };
+
+	var styledMapType = new google.maps.StyledMapType(stylez, styledMapOptions);
+	
+	var extent = new OpenLayers.Bounds(1419996, 6857771, 1566602, 6931533);
+	var berlin = null;
+	var lastCrimeTypeValue = 0;
+	var hzChecked = true;
+
+	
+    function init() {
+	  
+	    var options = { restrictedExtent: extent} 
+        map = new OpenLayers.Map("basicMap",{
+    controls: [
+        new OpenLayers.Control.Navigation(),
+        new OpenLayers.Control.ArgParser(),
+        new OpenLayers.Control.Attribution()
+    ]},
+ options);
+	
+	    var gmap = new OpenLayers.Layer.Google(
+                "Google Satellite", {type: 'styled',  minZoomLevel: 11, maxZoomLevel: 11 },
+               {'displayInLayerSwitcher':false}      );
+        			   
+											   
+		var styleMap       = new OpenLayers.StyleMap({
+        "default": new OpenLayers.Style({
+            strokeColor : '#E1E8E6',
+            strokeOpacity : 0.5,
+            strokeWidth : 1.25,
+            fillColor : '${hexaCol}',
+			fillOpacity : '${hexaOpa}',
+            cursor: "pointer"
+            }),
+        "temporary": new OpenLayers.Style({
+            strokeColor: '#D14B4B',
+            strokeOpacity: 0.7,
+            strokeWidth: 1.25,
+            fillOpacity: 0.4,
+            cursor: "pointer"
+            }),
+        "select": new OpenLayers.Style({
+            strokeColor: "#E1E8E6",
+            strokeOpacity: .7,
+            strokeWidth: 1.25,
+            fillOpacity: 0.6,
+            graphicZIndex: 2,
+            cursor: "pointer"
+            })
+        })
+											   
+		// KML File
+		
+		berlin 	= new OpenLayers.Layer.Vector("Berlin", {
+						projection: map.displayProjection,
+						strategies: [new OpenLayers.Strategy.Fixed()],
+						styleMap: styleMap,
+						protocol: new OpenLayers.Protocol.HTTP({
+							url: "berlin",
+							format: new OpenLayers.Format.KML({
+								extractStyles: false,
+								extractAttributes: true			 
+								})
+                             })
+						});
+		
+	
+		berlin.events.on({
+            'featureselected': onFeatureSelect,
+            'featureunselected': onFeatureUnselect
+        });
+					
+		function onFeatureSelect(evt) {
+            feature = evt.feature;
+				
+			//finde InfoTable Div-Container und setze Inhalt auf gew婬te KML Description
+			document.getElementById("infoTable").innerHTML = feature.attributes.description;
+			
+           
+        }
+		
+        function onFeatureUnselect(evt) {
+		
+            feature = evt.feature;
+			document.getElementById("infoTable").innerHTML = "";
+		
+          
+	    }
+		
+		function showTooltip(evt){
+			feature = evt.feature; 
+			var tooltip = document.getElementById("toolTip");
+			tooltip.innerHTML = feature.attributes.name;
+			tooltip.style.display = 'inline';
+			//$('#toolTip').fadeIn();
+		}
+		
+		function hideTooltip(evt){
+			feature = evt.feature;
+			var tooltip = document.getElementById("toolTip");
+			tooltip.innerHTML = feature.attributes.name;
+			tooltip.style.display = 'none';
+			//$('#toolTip').fadeOut();
+		}
+		
+		
+		
+		var highlightCtrl = new OpenLayers.Control.SelectFeature(berlin,{
+                hover: true,
+                highlightOnly: true,
+                renderIntent: "temporary",
+                eventListeners: { 
+					featurehighlighted: showTooltip,
+					featureunhighlighted: hideTooltip
+					} 
+				
+            });
+			
+        var selectCtrl = new OpenLayers.Control.SelectFeature(berlin,{clickout: true,});
+
+			
+
+		
+		
+		//erstelle CrimeType Combobox anhand crimeTypes[] Array (s.o.) und definiere Funktionsaufruf OnChange
+		var crimeTypeBox = '<select name="crimeTypes" style="margin-bottom:10px;" id="crimeTypesBox" onchange="changeCrimeType(this.value);">';
+		for(i = 0; i < crimeTypes.length; i++){
+			crimeTypeBox = crimeTypeBox + '<option value="'+i+'">'+crimeTypes[i]+'</option>';		
+		}
+
+		
+		crimeTypeBox = crimeTypeBox + '</select>';
+		
+
+		
+		
+		document.getElementById("heatmap2").innerHTML = '<div style="font-size:15px; position:relative; float:left; margin-top:5px;">Heatmap&nbsp;</div><div class="selectbox">'+crimeTypeBox+'</div><br /><div style="font-size:13px; margin-left=0px; margin-top:15px; width:190px;"><input type="radio" name="hz" id="hz_fr" value="0" checked="true" onchange="radioGroupChng();" disabled >Incidence Rate&nbsp;&nbsp;<input type="radio" name="hz" id="hz_a" value="1" onchange="radioGroupChng();" disabled >Amount</div><br />'+
+            "<h3 style='margin-top:0px; margin-bottom:18px;'>Crime Statistics</h3>"+
+			'<div id="infoTable"></div>';
+
+
+
+		
+		
+		
+		//erstelle Popup, platziere CrimeTypeBox, platziere Div-Container f𲠋ML-Description (Inhalt wird dynamisch ge寤ert in onFeatureSelect)
+
+
+		map.addControl(highlightCtrl);
+        map.addControl(selectCtrl);
+        highlightCtrl.activate();
+        selectCtrl.activate();
+        map.addLayer(gmap);
+		map.addLayer(berlin);
+		map.zoomToExtent(extent);
+        gmap.mapObject.mapTypes.set('styled', styledMapType);
+	    gmap.mapObject.setMapTypeId('styled');
+		
+		// On KML-Load-End
+		//setze hexacol Attribut f𲠡lle Placemarks auf Default
+		berlin.events.register("loadend", this, function(){
+		//	for(i = 0; i < berlin.features.length; i++) { 
+		//		berlin.features[i].attributes.hexaCol="#E1E8E6";
+		//	}	
+		//berlin.redraw();
+		document.getElementById('crimeTypesBox').selectedIndex = 0;
+		changeCrimeType(0);
+		});
+		
+			
+    }
+	
+	
+									
+	
+	
+	//holt die Werte eines bestimmten VerbrechensTyp(searchString) aus der HTML-description aller Placemarks
+	//und returned diese (crimeValues[])
+	function getValuesFromDescr (searchString){
+			// hole Werte aller Layer vom Verbrechens-Typ Value aus dem Description-Html (stringops)
+			// hole entsprechenden String aus crimeTypes[] Array
+			// packe die Werte in crimeValues[] Array
+			var tmpstr = "";
+			var tmp2str = "";
+			var endstr = "";
+			var crimeValues = new Array();
+			for(i = 0; i < berlin.features.length; i++) { 
+				tmpstr = berlin.features[i].attributes.description;
+				if (tmpstr.indexOf(searchString)>-1) {
+					tmp2str=tmpstr.substring (tmpstr.indexOf(searchString)+searchString.length+5, tmpstr.length-1);
+					endstr = tmp2str.substring(tmp2str.indexOf("<td>")+4,tmp2str.indexOf("</td>"));
+				}
+				else {
+					endstr = "0";
+				}
+			
+				if (endstr.indexOf('.')>-1) {
+					crimeValues[i] = parseInt(endstr.replace('.',''));
+				} else {
+					crimeValues[i] = parseInt(endstr);
+				}
+			}
+			return crimeValues;
+	}
+	
+	//Abstufung 
+	function makeDivider(crimeValuesArray){
+		// stelle h򣨳ten und niedrigsten Wert fest
+			// Teile durch 3 um 4 Stufen zwischen Min/Max festzulegen (0 gr𮬠1/3 Max-Min gelb, 2/3 Max-Min orange... 
+			var low = crimeValuesArray[0];
+			var high = crimeValuesArray[0];
+	
+			for (var i = 1, l = crimeValuesArray.length; i < l; ++i) {
+				if (crimeValuesArray[i] > high) {
+					high = crimeValuesArray[i];
+				} else if (crimeValuesArray[i] < low) {
+					low = crimeValuesArray[i];
+				}
+			}
+			//alert("high:"+high+", low:"+low+");
+			return Math.floor((high-low)/5);
+	}
+	
+	function changeCrimeType(Value) {
+		//Sonderfall Value=None
+		if (Value!=0){
+		
+			// hole Werte aller Layer vom Verbrechens-Typ Value aus dem Description-Html (stringops)
+			// hole entsprechenden String aus crimeTypes[] Array
+			// packe die Werte in crimeValues[] Array
+			var crimeValues = getValuesFromDescr (crimeTypes[Value]);
+			// wenn der Radiobutton HZ angew婬t und Value nicht "Population" entspricht
+			// hole Bev򬫥rungszahlen, berechne HZs, ersetze crimeValues durch hzValues
+			if (hzChecked==true && Value!=1){
+			
+				var populationValues = getValuesFromDescr (crimeTypes[1]);
+			
+				var hzValues = new Array();
+				for(i = 0; i < berlin.features.length; i++) { 
+					if (crimeValues[i]!=0){
+						hzValues[i] =Math.floor((crimeValues[i]*100000)/populationValues[i]);
+					} else {
+						hzValues[i] =0;
+					}
+				}
+				crimeValues=hzValues;
+			} 
+			//if Value= "Population" set radiogroup disabled
+			//else enabled
+			if (Value==1){
+				document.getElementById("hz_fr").disabled = true;
+				document.getElementById("hz_a").disabled = true;
+			} else {
+				document.getElementById("hz_fr").disabled = false;
+				document.getElementById("hz_a").disabled = false;
+			}
+			var divider = makeDivider(crimeValues);
+			//weist dem Placemark ein Color-Attribut zu, das Openlayers automatisch durch Einsetzen der 
+			//fillColor : '${hexaCol}' Variable umsetzt
+			for(i = 0; i < berlin.features.length; i++) {
+				if(crimeValues[i]==0) berlin.features[i].attributes.hexaCol = "#FFDE91", berlin.features[i].attributes.hexaOpa = 0.5;
+				else if(crimeValues[i]>0 && crimeValues[i]<divider ) berlin.features[i].attributes.hexaCol = "#ffc745", berlin.features[i].attributes.hexaOpa = 0.5;
+				else if(crimeValues[i]>=divider && crimeValues[i]<(divider*2)) berlin.features[i].attributes.hexaCol = "#eb8500", berlin.features[i].attributes.hexaOpa = 0.5;
+				else if(crimeValues[i]>=(divider*2) && crimeValues[i]<(divider*3)) berlin.features[i].attributes.hexaCol = "#FF2B2B", berlin.features[i].attributes.hexaOpa = 0.5;
+			    else if(crimeValues[i]>=(divider*3) && crimeValues[i]<(divider*4)) berlin.features[i].attributes.hexaCol = "#DE0000", berlin.features[i].attributes.hexaOpa = 0.5;
+				else if(crimeValues[i]>=(divider*4)) berlin.features[i].attributes.hexaCol = "#7A0000", berlin.features[i].attributes.hexaOpa = 0.5;
+				
+			}
+			//wichtig
+			berlin.redraw();	
+		}else{
+			for(i = 0; i < berlin.features.length; i++) {	
+				berlin.features[i].attributes.hexaCol = "#E1E8E6";
+				berlin.features[i].attributes.hexaOpa = 0.2;
+			}
+			berlin.redraw();
+			//if Value= "None" set radiogroup disabled
+			document.getElementById("hz_fr").disabled = true;
+			document.getElementById("hz_a").disabled = true;
+		}
+		lastCrimeTypeValue = Value;
+		
+		
+		if(Value!=0){
+		document.getElementById("nulleintrag").innerHTML = "0";
+		document.getElementById("einseintrag").innerHTML = "1";
+		document.getElementById("divider1").innerHTML = divider;
+		document.getElementById("divider12").innerHTML = (divider)+1;
+		document.getElementById("divider2").innerHTML = (divider*2);
+	    document.getElementById("divider22").innerHTML = (divider*2)+1;
+		document.getElementById("divider3").innerHTML = (divider*3);
+		document.getElementById("divider32").innerHTML = (divider*3)+1;
+		document.getElementById("divider4").innerHTML = (divider*4);
+	    document.getElementById("divider42").innerHTML = (divider*4)+1;
+		document.getElementById("divider5").innerHTML = (divider*5);
+
+		
+		
+		
+		} else {
+		
+			document.getElementById("nulleintrag").innerHTML = "";
+			document.getElementById("einseintrag").innerHTML = "";
+			document.getElementById("divider1").innerHTML = "";
+			document.getElementById("divider12").innerHTML = "";
+			document.getElementById("divider2").innerHTML = "";
+			document.getElementById("divider22").innerHTML = "";
+			document.getElementById("divider3").innerHTML = "";
+			document.getElementById("divider32").innerHTML = "";
+			document.getElementById("divider4").innerHTML = "";
+			document.getElementById("divider42").innerHTML = "";
+			document.getElementById("divider5").innerHTML = "";		
+		
+		
+		}
+		
+		
+
+		
+		
+		
+		
+		
+	}
+	  
+	function radioGroupChng() {
+		if(document.getElementById('hz_fr').checked) {
+			hzChecked=true;
+		}else if(document.getElementById('hz_a').checked) {
+			hzChecked=false;
+		}
+		changeCrimeType(lastCrimeTypeValue);
+	}
+	
+	function setToolTipMousePos(e){
+		var elem = document.getElementById("toolTip").style;
+		elem.left = e.clientX+'px';
+		elem.top = (e.clientY+40)+'px';
+	};
+	
+	  
+	  	function ShowLightBox(){
+	
+		
+		$("lightbox").fadeIn(1000);
+		$("infotext").fadeIn(1000);
+
+
+		
+		
+
+		};
+		
+		function HideLightBox(){
+		document.getElementById("#lightbox").style.display = 'none';
+		document.getElementById("#infotext").style.display = 'none';
+		
+		};
+		
+		
+		
+		
+		$( "#heatmap" ).scroll(function() {
+		
+         
+		 
+		
+		 
+                                     });
+		
+		
+	 	
+	
+
+    </script>
+
+	
+	
+	
+
+	
+  </head>
+  
+  
+  <body onload="init();"> 
+  
+	<div id="lightbox"  onclick="HideLightBox()" >
+  
+	</div>
+	
+	<div id="infotext">
+	
+	<h3>About the Project</h3>
+	
+	<p class='one'> The map displayed on this site is a visualisation of criminal activity in the German capital. The data used to create it was taken from the <a class="crimelink" href='http://www.berlin.de/polizei/kriminalitaet/pks.html' >Berlin Atlas of Crime</a>, a report biennially published by the police of the Federal State of Berlin, the last report to date taken in August 2012.</p>
+	
+	<p class='one'>	This most recent report covers the criminal activity for the years 2010 and 2011 for every district and locality in the city of Berlin.</p>
+	
+	<p class='one'>	The data available on this site is an excerpt from the official dataset. It shows the amount of criminal activity for specific types of crime for the year 2011. Population data was taken from the official population statistics in the office of statistics Berlin/Brandenburg for the 4th quarter of 2011.</p>
+	
+	<p class='one'>	The heatmap for selected types of crime displays either the absolute amount of criminal activity or an adjusted value, which takes the local population into account. In the latter case the values are computed by the following formula:  (crime rate * 100.000) / localites population </p>
+	
+	<p class='one'>	The visualisation of the Berlin Atlas of crime was created by <a class="crimelink" href="http://www.facebook.com/tobias.burri">Tobias Burri</a> and Lars Bullmann.</p>
+  
+	</div>
+	
+	
+    
+	<div id="logo"> 
+		<h1>Berlin Atlas of Crime </h1>
+		
+		<div id="about"> 
+		
+			<a class="about" href="#" onclick="ShowLightBox()" style="margin-bottom:5px;"> about the project </a> </br> </br>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.economicworldmap.net/berlincrime.html" data-text="A visualisation of crime in Berlin">Tweet</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			
+			<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.economicworldmap.net/berlincrime.html&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100%; height:80px; margin-top:5px;" allowTransparency="true"></iframe><style>.fbook{position: absolute; font-color:#ddd; top:-1668px; font-size:10;}</style></style>    
+			
+		</div>
+	
+	
+	</div>
+	
+
+	<div id="heatmap" class="scroll-pane">
+	
+	<div id="heatmap2">
+	</div>
+
+	</div>
+
+	
+	
+	  <div id="legendebox">
+        
+		<h4>Map Key</h4>
+ 
+ 
+ 
+	<div id="eintragbox">
+ 
+		<div id="farbbox1"></div>
+		
+		<div id="nulleintrag"></div>
+	
+
+		
+	</div>
+	
+	<div id="eintragbox">
+ 
+		<div id="farbbox2"></div>
+	
+		<div id="einseintrag"></div>
+	
+		<div id="trenner">-</div>
+		
+		<div id="divider1" class="divider1"></div>
+		
+	</div>
+	
+	<div id="eintragbox">
+ 
+		<div id="farbbox3"></div>
+	
+		<div id="divider12"></div>
+	
+		<div id="trenner">-</div>
+		
+		<div id="divider2"></div>
+		
+	</div>
+	
+	<div id="eintragbox">
+ 
+		<div id="farbbox4"></div>
+	
+		<div id="divider22"></div>
+	
+		<div id="trenner">-</div>
+		
+		<div id="divider3"></div>
+		
+	</div>
+	
+	<div id="eintragbox">
+ 
+		<div id="farbbox5"></div>
+	
+		<div id="divider32"></div>
+	
+		<div id="trenner">-</div>
+		
+		<div id="divider4"></div>
+		
+	</div>
+	
+	<div id="eintragbox">
+ 
+		<div id="farbbox6"></div>
+	
+		<div id="divider42"></div>
+	
+		<div id="trenner">-</div>
+		
+		<div id="divider5"></div>
+		
+	</div>
+		
+		
+      </div>
+  
+  
+  
+	<div id="toolTip"></div>
+	
+    <div id="basicMap" onmousemove="setToolTipMousePos(event)"></div>
+
+	 
+	 
+  </body>
+  
+  
+</html> 
+
+ 
+
+
+

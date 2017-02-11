@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	        
+	<title>US Government Shutdown</title>
+	
+		<!-- Meta data -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="language" content="en" />
+	<meta name="Description" content=" The graph shown on this site depicts the number of user comments in related posts on the social news aggregator Reddit for every hour in September and October 2013.">
+	<meta name="Keywords" content="us, government, d3.js, shutdown, javascript, visualisation, america, barchart, political crisis, politics, congress, senate, political system, deadlock, democratic, republican,  affordable care act, 2013">
+		
+		
+	<!-- Facebook Meta Data -->
+	<meta property="og:image" content="impact/govshutimpact.jpg"/>
+	<meta property="og:locality" content="Berlin"/>
+	<meta property="og:country-name" content="Germany"/>
+	<meta property="og:latitude" content="52.5234051"/>
+	<meta property="og:longitude" content="13.4113999"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:title" content="US Government Shutdown 2013"/>
+	<meta property="og:url" content="http://www.economicworldmap.net/impact/impact.html"/>
+	<meta property="og:site_name" content="economicworldmap.net/impact/impact.html"/>
+	
+	
+	
+	
+        <meta charset="utf-8">
+
+        <script type="text/javascript" src="d3/d3.v3.js"></script>	
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="d3/jquery.nicescroll.js"></script>
+		
+		<link rel="stylesheet" href="style.css">
+		
+		
+	<script>	
+	
+		$(document).ready( function() { 
+
+			$("#box").niceScroll({
+				cursorcolor:"#F2F2F2",
+				cursoropacitymin:1,
+				cursorwidth:10,
+				cursorborderradius:0
+			});
+		
+		var halflenght = (document.getElementById('box').scrollWidth/2) - 500;
+		$('#box').scrollLeft(halflenght); // Scroll screen 500 pixels down
+				   }
+		);
+
+	</script>	
+		
+
+		
+		
+    </head>
+	
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	
+	<style>
+	
+	
+	
+    body {   
+			background-size:100% 100%;
+            height:800px;
+			width:100%;
+			margin-right:0px;
+			margin-left:0px;
+			margin-bottom:0px;
+			margin-top:0px;
+			background-color:#1C1C1C;
+	        }
+	
+	#box { width: 972px;
+	       padding:50px;
+		   padding-top:70px;
+		   padding-bottom:0px;
+		   padding-left:100px;
+		   height:500px;
+		   position:relative; 
+		   margin:auto; 
+		   margin-bottom:0px; 
+		   margin-top:20px;
+		   border:1px solid #F2F2F2;
+		   overflow:auto;
+		   background-color:#1C1C1C;
+
+	}
+	
+	#preview{ float: right;
+			  margin-top:-50px;
+			  margin-left:600px;
+			  position:fixed;
+			  height:60px;
+			  width:400px;
+			  border: 1px solid white;
+			  padding:0px;
+	}
+	
+	
+	
+	
+	
+		#textbox { width: 1122px;
+		           height:180px;
+		           position:relative;  
+		           margin:auto; 
+		           margin-bottom:0px; 
+		           margin-top:20px;
+		           overflow:auto;
+		           background-color:#1C1C1C;
+		           color: #F2F2F2;
+	              }
+	
+	
+	#eventonetext{ margin-left:1750px;}
+	
+	#eventtwotext{ margin-left:2400px;}
+	
+	#eventthreetext,
+	#eventfourtext,
+	#eventfivetext{margin-left:2500px;}
+				 
+	#eventsixtext{ 
+				   margin-left:3200px;,
+				   margin-top:90px;
+				  }
+
+	#eventseventext{ margin-left:3330px;
+	                 height:160px;
+					 margin-top:90px;
+				   }
+				   
+	#eventeighttext{ margin-left:3990px;
+					 margin-top:55px;
+	                 height:230px;
+				   }			   
+	
+	.infotext{
+				position:absolute;
+				margin-top:120px;
+				height: 120px;
+				width: 300px;
+				margin-left:1550px;
+				display: none;
+				border:1px solid white;
+				color:#F2F2F2;
+				padding:10px;
+				font-family:Vollkorn;
+				font-size:14px;
+			 }
+	
+	
+
+	.line {fill:#F2F2F2; 
+	       stroke:none;}		
+		
+	.xaxis path,
+    .xaxis line {
+                fill: none;
+                stroke: grey;
+                shape-rendering: crispEdges;  
+	            color:#F2F2F2;
+				}
+	.xaxis text {fill:grey;
+	             }	
+				 
+				 
+	.yaxis path,
+    .yaxis line {
+                fill: none;
+                stroke: grey;
+                shape-rendering: crispEdges;  
+	            color:#F2F2F2;
+				}
+				
+	.yaxis text {fill:#F2F2F2;
+	             }				 
+
+				 
+	.monthtext{
+	           fill:#F2F2F2;
+			   font-family:Vollkorn;
+			   font-size:50px;
+
+	           }
+			   
+			   
+	.tooltip{	
+			    font-family:Lato;
+			    font-size:13px;
+                color:#F2F2F2;
+			    background-color:#1C1C1C;				
+	         }	
+	
+
+	.header{font-size:40px;
+	        margin:0px;}
+			
+			
+	.gpreview{pointer-events: all;}		
+			
+			   
+			   
+    p {font-family: Vollkorn;
+	   font-size:15px;}			   
+	
+	a{text-decoration:none;}
+	a:link{color:orange; font-family: Lato;}
+	a:visited{color:orange; font-family: Lato;}
+	a:hover{color:grey;font-family: Lato;}
+	 
+				 
+		
+	</style>
+	
+	
+    <body>
+	
+	
+	<div id='box'> 
+	
+	
+		<div id='preview'>
+	
+		</div>
+	
+	
+	
+		<div class='infotext' id='eventonetext'>
+			<b> September 20, 2013 </b> – House passes appropriations bill H.J.Res 59, a continuing resolution that would fund the government until December 15, 2013. </br> </br>
+			The bill included a controversial amendment that would defund the Affordable Care Act.	
+		</div>
+	
+		<div class='infotext' id='eventtwotext'>
+			<b> September 27, 2013 </b> – Senate amends H.J.Res. 59, removing the House amendment that would defund the Affordable Care Act. </br> </br>
+			This is commonly referred to as a clean continuing resolution.	
+		</div>
+
+		<div class='infotext' id='eventthreetext'>
+			<b> September 29, 2013 </b> – House amends H.J.Res. 59 a second time to add another amendment to defund the Affordable Care Act. </br> </br>
+			President Obama threatens veto.	
+		</div>
+	
+		<div class='infotext' id='eventfourtext'>
+			<b> September 30, 2013 </b> – Senate amends H.J.Res. 59 again to remove the defunding amendment and return to a clean continuing resolution. </br> </br>
+			House Speaker refuses to bring amended bill to vote. House passes H.Res.368 so only the Majority leader or his designee can bring H.J.Res.59 to a vote.
+		</div>
+	
+		<div class='infotext' id='eventfivetext'>
+			<b> October 1, 2013 </b> – Government shuts down.
+		</div>	
+	
+		<div class='infotext' id='eventsixtext'>
+			<b> October 2, 2013 </b> – Obama meets with Republican and Democratic leaders, but no agreement is reached. </br> </br>
+			House begins passing "mini" appropriations bills. Senate Majority Leader refuses to bring "mini" bills to vote.
+		</div>
+	
+		<div class='infotext' id='eventseventext'>
+			<b> October 9, 2013 </b> – President Obama invites the entire Congress to meet with him about the government shutdown and upcoming debt ceiling. </br> </br>
+			Separate meetings for House Democrats, House Republicans, Senate Democrats, and Senate Republicans were suggested. The House leadership responded that they would send 18 members to meet with Obama.
+		</div>
+	
+		<div class='infotext' id='eventeighttext'>
+			<b> October 16, 2013 </b> –  Congress plans last-minute votes to avert default. The plan would allow the U.S to continue borrowing until February 7. House of Representatives Speaker John Boehner said he would allow the deeply divided House to vote on the Senate plan to move the debt limit and a government reopening. </br> </br>
+			The Senate passed the bill by a vote of 81 to 18. It passed in the House a few hours later, 285 for and 144 against. President Obama signed the bill into law at 12:30am on October 17, effectively ending the shutdown and debt ceiling crisis.
+		</div>
+
+	</div>
+	
+	
+
+	
+	
+	
+	
+	<div id='textbox' align="justify"> 
+	
+		<p class='header'> The Impact of the US Government Shutdown 2013 </p>	
+		<p style='font-family:Lato; font-size:12px;'>The event of the US Government Shutdown 2013 was given extensive coverage by both national and international media
+		and correspondingly was heavily discussed in social networking services.
+		The graph shown above depicts the number of user comments in related posts on the social news aggregator Reddit for every hour in September and October 2013.
+		</br></br>
+		The data was extracted in early November 2013 using the Python package urllib2. All results of the search terms 'government' and 'shutdown' were considered.
+		Due to API restrictions only 500 comments
+		per post could be considered. Therefore the graph does not reflect the absolute number of comments made during this period, but gives some insights
+        into the dynamics of the ongoing discussion.
+		</br></br>
+		Texts used in the visualisation were taken from <a href='http://en.wikipedia.org/wiki/United_States_federal_government_shutdown_of_2013'>Wikipedia</a>. 
+		Made with d3.js by <a href='https://www.facebook.com/tobias.burri'> Tobias Burri</a>.
+		
+		
+		
+		</p>
+	
+		<!--<div id='test' style='position:absolute; height:50px; width:200px;  border:1px white solid;'>0
+		</div> -->
+	
+	</div>
+
+	
+	
+	
+	
+	
+        <script type="text/javascript">
+		
+		
+		var  width       = 5856;
+        var  heightsvg   = 490;
+		var  heightdata  = 400;
+		var heightevents = 420;
+		
+		
+		
+		 
+		var canvas = d3.select('#box')
+					   .append('svg')
+				       .attr('width', 5856)
+				       .attr('height', heightsvg);
+					   
+		var previewcanvas = d3.select('#preview')
+                              .append('svg')
+                              .attr('width', 400)
+                              .attr('height', 60)
+							  .append("g")
+                              .attr("class", "gpreview");						  
+	
+		var div = d3.select("#box").append("div")   
+					.attr("class", "tooltip")               
+					.style("opacity", 0)
+					.style('border','1px solid grey')
+					.style('width','160px')
+					.style('height','40px')
+					.style('padding-top','5px')
+					.style('position','absolute')
+					.style('left', '20px')
+					.style('top', '20px');
+					
+					
+		var eventone = canvas.append('circle')
+							 .attr('class', 'eventone')
+                             .attr("cy", heightevents)
+                             .attr("cx", 1915)
+                             .attr("r",  6)
+                             .attr('fill', '#FF9D08');
+							 
+	    var eventtwo = canvas.append('circle')	
+                             .attr("cy", heightevents)
+                             .attr("cx", 2585)
+                             .attr("r",  6)
+                             .attr('fill', '#FF9D08');
+							 
+	    var eventthree = canvas.append('circle')	
+                             .attr("cy", heightevents)
+                             .attr("cx", 2780)
+                             .attr("r",  6)
+                             .attr('fill', '#FF9D08');
+
+        var eventfour = canvas.append('circle')	
+                             .attr("cy", heightevents)
+                             .attr("cx", 2877)
+                             .attr("r",  6)
+                             .attr('fill', '#FF9D08');
+
+        var eventfive = canvas.append('circle')	
+                             .attr("cy", heightevents)
+                             .attr("cx", 2974)
+                             .attr("r",  6)
+                             .attr('fill', '#FF9D08');
+
+        var eventsix = canvas.append('circle')	
+                             .attr("cy", heightevents)
+                             .attr("cx", 3071)
+                             .attr("r",  6)
+                             .attr('fill', '#FF9D08');
+
+        var eventseven = canvas.append('circle')	
+                             .attr("cy", heightevents)
+                             .attr("cx", 3738)
+                             .attr("r",  6)
+                             .attr('fill', '#FF9D08');
+
+        var eventeight = canvas.append('circle')	
+                             .attr("cy", heightevents)
+                             .attr("cx", 4412)
+                             .attr("r",  6)
+                             .attr('fill', '#FF9D08');								 
+							 
+					   
+
+        var x = d3.time.scale()
+                 .range([0, width]);
+
+        var y = d3.scale.linear()
+                 .range([heightdata, 0]);
+			
+		var xAxis = d3.svg.axis()
+                      .scale(x)
+					  .ticks(12)
+                      .orient("bottom");
+
+        var yAxis = d3.svg.axis()
+                      .scale(y)
+                      .orient("left");
+					  
+		var parseDate = d3.time.format("%H:%M %d-%B-%Y").parse;
+		
+          
+					   
+
+		//$( "#box" ).scroll(function() {
+		
+        // document.getElementById('test').innerHTML = (document.getElementById('box').scrollLeft/document.getElementById('box').scrollWidth)*400 ; //SCHIEBER
+		 
+	//	 console.log(document.getElementById('box').scrollLeft / document.getElementById('box').scrollWidth  )
+		 
+      //                               });
+
+
+
+
+			
+		d3.csv('impactdata.csv', function(data){  
+		
+		
+		data.forEach(function(d) {
+            d.date = parseDate(d.date);
+                                 });
+		
+		
+		var impacttime = function(date) {
+		
+		          var string = date.toTimeString();
+				  var time = string.substring(0,5);
+				  
+		          return time	
+		                                };
+			
+		
+		x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain(d3.extent(data, function(d) { return parseInt(d.value); }));
+		
+		
+		var heightScale = d3.scale.linear()
+						         .domain([0, 1300])
+						         .range([0,heightdata]);	
+		
+
+		
+		var bars =	canvas.selectAll('rect')
+							  .data(data)
+				              .enter()
+					              .append('rect')
+								  .attr('width', 3)
+								  .attr('height', function(d) { return  heightScale(d.value); })
+								  .attr('fill', '#F2F2F2' )
+								  .attr('x', function(d,i){return i*4})
+								  .attr('y', function(d){return  heightdata - heightScale(d.value)})
+								  .attr('transform', 'translate(40, 0 )');	
+		
+		
+		canvas.append("g")
+              .attr("class", "xaxis")
+              .attr("transform", "translate(40," + heightdata + ")")
+              .call(xAxis); 
+		
+	
+		canvas.append("g")
+              .attr("class", "yaxis")
+			  .attr("transform", "translate(40,0)")
+              .call(yAxis)
+		
+		
+        canvas.append('text')
+		      .text('September')
+			  .attr('class','monthtext')
+			  .attr("transform", "translate(1380,100)");
+			  
+		canvas.append('text')
+		      .text('October')
+			  .attr('class','monthtext')
+			  .attr("transform", "translate(4340,100)");
+
+		canvas.append('text')
+		      .text('')
+			  .html('&#9658;')
+			  .attr('class', 'scrolltext')
+			  .attr('fill','white')
+			  .style('font-size','14px')
+			  .attr("transform", "translate(3067,480)");
+			  
+			  
+		canvas.append('text')
+		      .text('')
+			  .html('&#9668;')
+			  .attr('class', 'scrolltext')
+			  .attr('fill','white')
+			  .style('font-size','14px')
+			  .attr("transform", "translate(2867,480)");
+			  
+		canvas.append('text')
+		      .text('Scroll')
+			  .attr('fill','white')
+			  .attr('class', 'scrolltext')
+			  .style('font-size','14px')
+			  .style('font-family', 'Lato')
+			  .attr("transform", "translate(2955,478)");		  
+			  
+			  
+
+
+
+	    bars.on("mouseover", function(d) {  
+							d3.select(this).transition().duration(0).style("opacity", 0.5);
+							div.transition().duration(100).style("opacity", 1)							
+							div.html('<span style="margin-bottom:10px; padding:0px;">' +  d.date.toDateString() + ' ' + impacttime(d.date) + '</span> </br><p style="margin-top:3px; padding:2px;">' + d.value  + '<p>' )
+							   .style("left", (parseInt(d3.select(this)[0][0].attributes[3].value) + 60).toString() + 'px' )
+							   .style("top", (heightdata + 100).toString() + 'px');	
+							})
+														
+						.on("mouseout", function(d) {
+							d3.select(this).transition().duration(0).style("opacity", 1);			 				
+							div.transition().duration(200).style("opacity", 0)							
+							});
+
+
+        eventone.on("mouseover", function(d) { 
+								d3.select(this).transition().duration(300).style("fill", '#F2F2F2'); 
+								$("#eventonetext").fadeIn(300);
+		                                     })
+		         .on("mouseout", function(d) {
+				                d3.select(this).transition().duration(300).style("fill", '#FF9D08');
+								$("#eventonetext").fadeOut(300);
+				                              });
+											  
+					  
+		eventtwo.on("mouseover", function(d) { 
+								d3.select(this).transition().duration(300).style("fill", '#F2F2F2');
+                                $("#eventtwotext").fadeIn(300);
+		                                     })
+		         .on("mouseout", function(d) {
+				                d3.select(this).transition().duration(300).style("fill", '#FF9D08');
+				 				$("#eventtwotext").fadeOut(300);
+				                              });									  
+		
+		eventthree.on("mouseover", function(d) { 
+								d3.select(this).transition().duration(300).style("fill", '#F2F2F2');
+								$("#eventthreetext").fadeIn(300);
+		                                     })
+		         .on("mouseout", function(d) {
+				                d3.select(this).transition().duration(300).style("fill", '#FF9D08');
+				 				$("#eventthreetext").fadeOut(300);
+				                              });	
+
+		eventfour.on("mouseover", function(d) { 
+								d3.select(this).transition().duration(300).style("fill", '#F2F2F2');
+								$("#eventfourtext").fadeIn(300);
+		                                     })
+		         .on("mouseout", function(d) {
+				                d3.select(this).transition().duration(300).style("fill", '#FF9D08');
+				 				$("#eventfourtext").fadeOut(300);
+				                              });
+		
+		eventfive.on("mouseover", function(d) { 
+								d3.select(this).transition().duration(300).style("fill", '#F2F2F2');
+								$("#eventfivetext").fadeIn(300);
+		                                     })
+		         .on("mouseout", function(d) {
+				                d3.select(this).transition().duration(300).style("fill", '#FF9D08');
+				 				$("#eventfivetext").fadeOut(300);
+				                              });
+
+		eventsix.on("mouseover", function(d) { 
+								d3.select(this).transition().duration(300).style("fill", '#F2F2F2');
+								$("#eventsixtext").fadeIn(300);
+		                                     })
+		         .on("mouseout", function(d) {
+				                d3.select(this).transition().duration(300).style("fill", '#FF9D08');
+				 				$("#eventsixtext").fadeOut(300);
+				                              });
+
+		eventseven.on("mouseover", function(d) { 
+								d3.select(this).transition().duration(300).style("fill", '#F2F2F2');
+								$("#eventseventext").fadeIn(300);
+		                                     })
+		         .on("mouseout", function(d) {
+				                d3.select(this).transition().duration(300).style("fill", '#FF9D08');
+				 				$("#eventseventext").fadeOut(300);
+				                              });
+											  
+											  
+		eventeight.on("mouseover", function(d) { 
+								d3.select(this).transition().duration(300).style("fill", '#F2F2F2');
+								$("#eventeighttext").fadeIn(300);
+		                                     })
+		         .on("mouseout", function(d) {
+				                d3.select(this).transition().duration(300).style("fill", '#FF9D08');
+				 				$("#eventeighttext").fadeOut(300);
+				                              });
+											  
+		
+		
+		});		   
+					  
+
+					  
+		d3.csv('posttimeseries.csv', function(data){  
+		
+		
+
+       		previewcanvas.append('text')
+					.text('September')
+					.attr('fill','white')
+					.style('font-size','5px')
+					.style('font-family', 'Vollkorn')
+					.attr("transform", "translate(100,25)");
+		
+			previewcanvas.append('text')
+					.text('October')
+					.attr('fill','white')
+					.style('font-size','5px')
+					.style('font-family', 'Vollkorn')
+					.attr("transform", "translate(290,25)");
+		
+		
+		
+		
+		var prevScale = d3.scale.linear()
+						         .domain([0, 800])
+						         .range([0,40]);
+		
+		
+		
+		var prewviewbars =	previewcanvas.selectAll('rect')
+							      .data(data)
+				                  .enter()
+					                 .append('rect')
+								     .attr('width', 4)
+								     .attr('height', function(d) { return  prevScale(d.y); })
+								     .attr('fill', '#F2F2F2' )
+								     .attr('x', function(d,i){return i*6})
+								     .attr('y', function(d){return  60 - prevScale(d.y)})
+								     .attr('transform', 'translate(20, -10 )');	
+		
+		
+		var prevslider = previewcanvas.append('rect')
+		                              .attr('width', 75)
+									  .attr('id', 'slide')
+									  .attr('height', 50)
+									  .attr('fill', 'transparent')
+									  .attr('stroke', '#F2F2F2')
+									  .attr('transform', 'translate(5, 5 )')
+									  .attr('x',166.7);
+									  
+		var prevrect = 	previewcanvas.append('rect')
+                                     .attr('width',400)
+                                     .attr('height',60)
+                                     .attr('fill','transparent')
+                                     .attr('stroke','grey');									 
+									  
+		
+		//console.log(d3.mouse(this));
+		
+		
+		$( "#box" ).scroll(function() {
+                                     
+					prevslider.attr('x',   (document.getElementById('box').scrollLeft/ (document.getElementById('box').scrollWidth - 200))* 375 ) ;
+		                        
+					d3.selectAll('.scrolltext').transition().duration(400).attr('opacity',0);
+
+                                     });
+									  
+		
+
+		prevrect.on("click", function(d) { 
+		
+								console.log('Peter');
+								
+				console.log(d3.mouse(this)[0]);
+				
+				if(d3.mouse(this)[0] < 325){
+				
+				prevslider.attr('x',  d3.mouse(this)[0] );}
+				
+				else{prevslider.attr('x',315)}
+				
+				
+				$('#box').scrollLeft( (d3.mouse(this)[0]/400)*document.getElementById('box').scrollWidth);
+				
+		                                     });
+				
+		});	
+
+
+        </script>
+	
+		
+    </body>
+</html>   
+
+

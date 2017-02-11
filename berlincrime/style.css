@@ -1,0 +1,485 @@
+body, 
+
+html,
+ 
+
+
+ #basicMap{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+	              }
+				  
+ #logo          {
+            width: 500 px;
+            height: 100px ;
+            margin: 0;
+			position:absolute;
+			margin-top:15px;
+			margin-left:15px;
+			z-index: 1000;
+			color:#D8D8D8;
+			font-family: arial,  sans-serif;
+			font-size:15px;
+			font-weight:bold;
+			float:right;
+	              }
+				  
+#about         { float:left;  
+             color:#8c8c8c;
+			 height:80px;
+			
+
+					}
+					
+.scroll-pane{}
+						
+#heatmap {  
+		
+			height:250px;
+			width:350px;
+			position:absolute;
+			background-image:url('http://www.economicworldmap.net/images/bg_popup.png');
+			border:1px solid #989898;
+			z-index:1000;
+			float:right;
+			right:20px;
+			top:20px;
+			font-size:15px;
+			font-family: arial,  sans-serif;
+			color:#D8D8D8;
+			padding:5px !important;
+			
+		
+			
+						}
+						
+#heatmap2     {width: 305px;
+			height:390px;
+			z-index:1500;
+			padding-bottom:5px !important; 
+		
+			
+				}	
+						
+#heatmap table{width:325px;
+			 height:240px;	}
+						
+						
+#lightbox{	width:100%;
+			height:100%;
+			position:absolute;
+			background-image:url('http://www.economicworldmap.net/images/bg_lightbox1.png');
+			z-index:2000;
+			display:none;
+			
+
+
+						}		
+
+#infotext {  
+			height:450px;
+			width:450px;
+			position:absolute;
+			background-image:url('http://www.economicworldmap.net/images/bg_popup.png');
+			border:1px solid #989898;
+			z-index:2500;
+			display:none;
+			margin:auto;
+			top:25%;
+			left:35%;
+			padding:10px;
+					
+						}						
+					
+
+
+#loadgif {
+
+		height:100%;
+		width:100%;
+		background-color:#939393;
+		position:absolute;
+		z-index: 2500;
+		background-image: url('http://www.economicworldmap.net/32.gif');
+		background-repeat: no-repeat;
+		background-position:50% 50%;
+
+
+
+}
+
+					
+/*
+					
+.olControlZoom{z-index:2000 !important;}
+				  
+div.olControlMousePosition {
+                font-family: Arial;
+                color: #D8D8D8;
+				height:20px;
+				margin-right:30px;
+				margin-bottom:30px;
+				
+				
+            }
+
+.olControlMousePosition.olControlNoSelect{
+
+font-family: arial,  sans-serif;
+font-size: 20px;
+line-height: normal;
+
+}
+
+
+
+ 
+.olPopup 
+{
+	margin: 0px;
+	padding:0px;
+	font-size: 22px;
+	font-family: arial, sans-serif;
+	border:1px solid #989898 !important;
+    font-weight:lighter;
+	background-color:transparent !important;
+ 
+   
+
+}
+
+
+
+.olPopupContent {	
+                    color:#D8D8D8 ;
+                    padding:0px;
+					margin:0px; 
+					background-color:transparent !important; 
+					
+								
+}
+
+.olPopupContent table {width:100%;}
+
+.olPopupCloseBox { padding-right:0px;
+                   margin:0px; }
+
+
+
+
+
+.olPopupCloseBox{
+
+
+
+
+background-image: url('http://www.economicworldmap.net/close.gif') !important;
+}	   
+
+*/
+
+
+
+
+
+h1{font-size:45px; color:#D8D8D8; font-family: arial,  sans-serif; margin-bottom:0px; margin-top:10px;}
+h3 {font-weight:lighter; margin-top:15px; font-size: 22px; font-family: arial, sans-serif;  font-weight:lighter;  color:#D8D8D8 ;}
+h4 {font-weight:lighter; margin-top:15px; margin-left:15px; font-size: 22px; font-family: arial, sans-serif;  font-weight:lighter;  color:#D8D8D8 ;}
+a.about{color:#8c8c8c; margin:0px; margin-right:5px; text-decoration:none; }
+a.about:visited{color:#8c8c8c; margin:0px; margin-right:5px; text-decoration:none;}
+a.about:hover{color:#D8D8D8; margin:0px; margin-right:5px;}
+a.crimelink{color:#d38b10; margin:0px; text-decoration:none; }
+a.crimelink:visited{color:#d38b10; margin:0px; text-decoration:none;}
+a.crimelink:hover{color:#8c8c8c; margin:0px;}
+p.one{font-size:13px; text-align:justify; font-family: arial,  sans-serif; color:#D8D8D8;}
+p.two{font-size:13pt; text-align:justify; font-family: arial,  sans-serif; color:#D8D8D8;}
+
+.tablestyleoverall{font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100;border-collapse:collapse;padding:3px 3px 3px 3px}
+.tablestyleheader {text-align:center;font-weight:bold;background:grey;border:1px solid #A8A8A8}
+.tablestyle {background:grey;border:1px solid #A8A8A8}
+
+#toolTip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0px;
+    top: 0px;
+	padding-top:4px;
+	padding-left:5px;
+	padding-right:5px;
+	font-family: arial, sans-serif;
+	color: #E0E0E0;
+	z-index: 1000;
+	font-size:12px;
+	border:1px solid #9E9E9E;
+	height:20px;
+	font-weight:bold;
+	background-image:url('http://www.economicworldmap.net/images/bg_popup.png');
+	
+}
+
+
+
+/*Legende*/
+
+
+
+#legendebox     {
+            width: 180 px;
+            height: 255px ;
+			position:absolute;
+			margin-top:180px;
+			margin-left:15px;
+			z-index: 1000;
+			color:#D8D8D8;
+			font-family: arial,  sans-serif;
+			font-size:15px;
+			padding:3px;
+		
+			background-image:url('http://www.economicworldmap.net/images/bg_popup.png');
+			border:1px solid #989898;
+	              }
+
+						 
+#eintragbox{  
+			height:17px;
+			width:151px;
+			position:relative;
+		
+			margin:15px;
+			margin-bottom:5px;
+			z-index:1000;
+			font-size:11px;
+			font-weight:bold;
+			color:#D8D8D8;
+			font-family:Arial,Verdana,Times;
+			
+			
+						}
+						
+#nulleintrag{width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important; background-image:url('http://www.economicworldmap.net/images/bg_popup.png');  }
+
+#trenner{width:15px; height:15px; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important; }
+
+#einseintrag{width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important; background-image:url('http://www.economicworldmap.net/images/bg_popup.png'); }
+#divider1 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider12 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider2 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider22 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider3 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider32 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider4{width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider42 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider5 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+#divider52 {width:50px; height:15px; border:1px solid #9E9E9E; position:relative; float:left; z-index:1000; text-align:center; vertical-align:text-top !important;background-image:url('http://www.economicworldmap.net/images/bg_popup.png');}
+
+#farbbox1{width:15px; height:15px; border:1px solid #9E9E9E; margin-right:15px; background-color:#FFDE91; position:relative; float:left; z-index:1000; opacity:0.7;}
+#farbbox2{width:15px; height:15px; border:1px solid #9E9E9E; margin-right:15px; background-color:#ffc745; position:relative; float:left; z-index:1000; opacity:0.7;}
+#farbbox3{width:15px; height:15px; border:1px solid #9E9E9E; margin-right:15px; background-color:#eb8500; position:relative; float:left; z-index:1000; opacity:0.7;}
+#farbbox4{width:15px; height:15px; border:1px solid #9E9E9E; margin-right:15px; background-color:#FF2B2B; position:relative; float:left; z-index:1000; opacity:0.7;}
+#farbbox5{width:15px; height:15px; border:1px solid #9E9E9E; margin-right:15px; background-color:#DE0000; position:relative; float:left; z-index:1000; opacity:0.7;}
+#farbbox6{width:15px; height:15px; border:1px solid #9E9E9E; margin-right:15px; background-color:#7A0000; position:relative; float:left; z-index:1000; opacity:0.7;}
+
+
+
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+.jspContainer
+{
+	overflow: hidden;
+	position: relative;
+	
+	
+}
+
+.jspPane
+{
+	position: absolute;
+}
+
+.jspVerticalBar
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 16px;
+	height: 100%;
+	background: transparent;
+}
+
+.jspHorizontalBar
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 16px;
+	background: red;
+}
+
+.jspVerticalBar *,
+.jspHorizontalBar *
+{
+	margin: 0;
+	padding: 0;
+}
+
+.jspCap
+{
+	display: none;
+}
+
+.jspHorizontalBar .jspCap
+{
+	float: left;
+}
+
+.jspTrack
+{
+	background: transparent;
+	position: relative;
+	height:250px !important;
+	
+	
+	
+}
+
+.jspDrag
+{
+	background: transparent;
+	position: relative;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	border:1px solid #989898;
+	height:156px !important;
+	background-image:url('http://www.economicworldmap.net/images/bg_popup.png');
+	
+}
+
+
+.jspDrag:hover
+{
+	background: grey;
+	position: relative;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	border:1px solid #989898;
+	height:156px !important;
+
+	background-image:url('http://www.economicworldmap.net/images/bg_popup.png');
+	
+}
+
+
+
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag
+{
+	float: left;
+	height: 100%;
+}
+
+.jspArrow
+{
+	background: #50506d;
+	text-indent: -20000px;
+	display: block;
+	cursor: pointer;
+}
+
+.jspArrow.jspDisabled
+{
+	cursor: default;
+	background: grey; 
+}
+
+.jspVerticalBar .jspArrow
+{
+	height: 16px;
+}
+
+.jspHorizontalBar .jspArrow
+{
+	width: 16px;
+	float: left;
+	height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus
+{
+	outline: none;
+}
+
+.jspCorner
+{
+	background: #eeeef4;
+	float: left;
+	height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner
+{
+	margin: 0 -3px 0 0;
+}
+
+
+
+
+
+
+
+
+
+.selectbox
+{
+
+float:left;
+position:relative;
+margin-left:3px;
+height:25px;
+width:15px;
+
+
+  }
+    
+.selectbox select
+ {
+ padding:3px;
+ border:1px solid #989898 !important;
+ background-image:url('http://www.economicworldmap.net/images/bg_popup.png') !important;
+ border:1px solid #989898;
+ background:transparent;
+ font-family: arial,  sans-serif;
+ color:#D8D8D8;
+
+ }
+ 
+
+
+ 
+.selectbox option
+ {
+ 
+ background-image:url('http://www.economicworldmap.net/images/bg_popup.png') !important;
+
+ background:grey;
+ font-family: arial,  sans-serif;
+ color:white;
+ }
+ 
+
+ 
+ 
+ 
+ 
+ 

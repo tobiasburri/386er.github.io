@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="d3/d3.v3.js"></script>
+		<link rel="stylesheet" href="style.css">
+    </head>
+	
+	
+    <body>
+	
+        <script type="text/javascript">
+		
+		var dataset = new Array(); 
+		
+		for( i=0; i<25; i++ ){		
+		dataset[i] = Math.random()*600				
+							 };
+
+        dataset = dataset.sort(function(a,b){return a-b}); 
+		
+		width   = 500; 
+		height  = 500;	 	
+		
+		var widthScale = d3.scale.linear()
+						   .domain([0, Math.max.apply( null, dataset )])
+						   .range([0,width]);
+		
+		var colorScale = d3.scale.linear()
+						   .domain([0, Math.max.apply( null, dataset )])
+						   .range(["red","darkblue"]);
+		
+		var axis= d3.svg.axis()
+					.ticks(5)
+					.scale(widthScale);
+		
+		
+		var canvas = d3.select('body')
+					.append('svg')
+					.attr('width', width)
+					.attr('height', height)
+					.append('g')
+					.attr('transform','translate(20,10)');
+
+	   
+		
+		var bars = canvas.selectAll('rect')
+				.data(dataset)
+				.enter()
+					.append('rect')
+					.attr('width', function(d) { return widthScale(d); })
+					.attr('height', 9)
+					.attr('fill', function(d) {return colorScale(d) })
+					.attr('y', function(d,i){return i*10});
+					
+					
+					
+		canvas.append('g')
+			.attr('transform','translate(0,260)')
+			.call(axis);
+		</script> 
+		
+
+
+
+		
+
+		
+		
+    </body>
+</html>     

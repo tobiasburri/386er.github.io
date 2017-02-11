@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		 <link href='https://fonts.googleapis.com/css?family=Playfair+Display|Open+Sans' rel='stylesheet' type='text/css'>
+		 <link rel="stylesheet" href="style.css">
+		 
+        <title>D3 Test</title>
+		
+        <script type="text/javascript" src="../libraries/d3.js"></script>
+		<script type="text/javascript" src="../libraries/jquery.min.js"></script>
+		<script type="text/javascript" src="../libraries/underscore.js"></script>
+		<script type="text/javascript" src="../libraries/wad.min.js"></script>
+
+    </head>
+    <body>
+	
+		<div class="wrapper">
+		<div class="sub-wrapper">
+		<div id='rootElement'> </div> 
+		</div>
+		</div> 
+		
+        <script type="text/javascript">
+		
+			var
+				width = 800,
+				height = 800,
+				numberOfCells = 10,
+				radius = width / 2,
+				centre = {'x': width/2, 'y':height/2},
+				buffer = 2,
+				bell = new Wad({source : 'bell.wav'})	,
+				rootElem = d3.select('#rootElement'),
+				colors = ['black','#9a9a9a']
+				svg  = rootElem.append('svg')
+							 .attr("width", width)
+							 .attr("height", height);
+				
+			
+var determineSizeofCells = function(nCells) {
+		  var sizeOfCell = (width - buffer) / nCells;
+		  return sizeOfCell;
+		};
+
+
+		var isInsideOfCircle = function(square) {
+			var x1 = square.x,
+				y1 = square.y,
+				x2 = square.x + square.size,
+				y2 = square.y + square.size,
+				result = true,
+				coordinates = [
+					{'x':x1, 'y':y1}, {'x':x1, 'y':y2},
+					{'x':x2, 'y':y1}, {'x':x2, 'y':y2}
+				];
+		  
+		  coordinates.forEach(function(edge) {
+			if( Math.pow((edge.x - centre.x),2) + Math.pow((edge.y - centre.y),2) > Math.pow(radius,2)) { result = false;
+			}	
+		  })
+		  return result;
+		};
+
+
+		var createRangeIndeces =  function(nCells) {
+			var size = determineSizeofCells(nCells);
+			var container = []
+				_.range(nCells).forEach(function (i) {
+					return _.range(nCells).forEach(function (j) {
+						container.push({'x':j * size + buffer,'y':i * size + buffer, 'size':size});
+					});
+				});		
+			return container;
+		};
+
+
+		var getValidCells = function(rangeIndeces) {
+			var container = [];
+		  rangeIndeces.forEach( function(obj) {
+			if(isInsideOfCircle(obj)){
+				container.push(obj)
+				}	
+			}
+		  )
+			return container;
+		}
+
+		var endAll = function (transition, callback) { 
+		  if (transition.size() === 0) { callback() }
+		  var n = 0; 
+		  transition 
+			.each(function() { ++n; }) 
+			.each("end", function() { if (!--n) callback.apply(this, arguments); }); 
+		};
+
+
+		var getRanNum = function(num) {
+		  var  ranNum = Math.ceil(Math.random() * num);
+		  return ranNum;
+
+		}
+			
+			
+			var endAll = function (transition, callback) { 
+				if (transition.size() === 0) { callback() }
+				var n = 0; 
+				transition 
+					.each(function() { ++n; }) 
+					.each("end", function() { if (!--n) callback.apply(this, arguments); }); 
+			};
+			
+			var getRanNum = function(num) {
+				var  ranNum = Math.ceil(Math.random() * num);
+				return ranNum;
+			
+			}
+			
+	
+			var createColorScale = function(domain) {
+				var colorScale = d3.scale.linear()
+					.domain([
+						0, 
+						1/6*domain, 
+						2/6*domain, 
+						3/6*domain, 
+						4/6*domain, 
+						5/6*domain])
+					.range(["red", "orange", "yellow", "green", "blue", "purple"]);
+				return colorScale;
+			};
+
+
+			var randomColorScale = function(ranNum) {
+				var n = Math.floor(ranNum*255*255*255);
+				var hex = Number(n).toString(16);
+				while(hex.length < 6) {
+					hex = "0"+hex;
+				}
+				return '#' + hex;
+			};
+
+	
+	
+			var render = function(nCells) {
+			
+			
+				if(nCells > 40) {
+					nCells = 	1;
+				}
+				d3.selectAll('.square').remove();
+				var size = determineSizeofCells(nCells);
+				var rangeIndex = createRangeIndeces(nCells);
+				var squareData = getValidCells(rangeIndex);
+				var modulo = getRanNum(nCells);
+				var ternary = Math.random();
+				var ternary2 = Math.random();
+				var cScale = createColorScale(nCells);
+
+				var ranCol1 = randomColorScale(ternary);
+				var ranCol2 = randomColorScale(ternary2);
+				d3.select('body').style('background-color',ranCol1)
+				d3.select('.sub-wrapper').style('background-color', ranCol2)
+				rootElem.style('background-color', 'transparent');
+				
+				
+				
+				
+				
+				svg.selectAll('placeholder')
+					.data(squareData)
+					.enter()
+					.append('rect')
+					.style('opacity', 0)
+					.attr('class', 'square')
+					.attr('x', function(d,i) {return d.x})
+					.attr('y', function(d,i) {return d.y})
+					.style('fill', ranCol1)
+					.style('stroke-width', 0.5)
+					.style('stroke', ranCol2) 
+					.transition(400).delay(function(d,i) {return i * 1  })
+					.style('opacity', function(d,i) {return  ternary > 0.5 ?  ((i % modulo) * 0.1) :  (1 -  (i % modulo) * 0.1)  })
+					.attr('width', size -1)
+					.attr('height', size - 1)
+					.call(endAll, function() {
+						render(nCells + 1);
+						bell.play();
+					});
+			
+			}
+			
+			render(numberOfCells);
+	
+	
+	
+	
+	
+        </script>
+    </body>
+</html>   

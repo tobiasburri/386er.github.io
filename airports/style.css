@@ -1,0 +1,53 @@
+
+
+#rootElement {
+	
+width:1600px;
+height:900px;
+margin-top: 50px;
+border:1px solid #9a9a9a;
+background-color:black;
+text-align: center;
+z-index:-1
+}
+
+.wrapper {
+width:1600px;
+position:relative;
+margin:auto;
+}
+
+
+.tool-tip {
+position: absolute; 
+width: 250px; 
+height: 70px; 
+border: 1px solid #9a9a9a; 
+opacity: 0; 
+background-image:url('../images/bg_lightbox1.png');
+border-radius:5px;
+}
+
+
+.tool-tip-header {
+margin-bottom:0px; 
+margin-top:8px; 
+padding:0px; 
+text-align: center; 
+font-family: 'Playfair Display', serif;
+color: whitesmoke;
+font-size:20px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.tool-tip-line {
+margin-top:-15px;  
+font-family: 'Open Sans', sans-serif;
+padding:2px;
+text-align: center;
+color: #9a9a9a;
+font-size: 13px;
+font-weight: 10;
+}

@@ -1,0 +1,191 @@
+.gridster * {
+  margin:0;
+  margin-bottom: 50px;
+  padding:0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+/*/
+/* demo
+/*/
+
+
+body {
+	font-size: 16px;
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+	color: #444;
+	margin: 30px 40px;
+}
+
+.controls {
+	margin-bottom: 20px;
+}
+
+/*/
+/* gridster
+/*/
+
+.gridster ul {
+	background-color: transparent;
+	border: 2px dotted #B2B2B2;
+	padding-bottom: 5px;
+}
+
+.gridster div {
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	line-height: 100%;
+	padding-top: 5px;
+}
+
+
+.gridster {
+	margin: 0 auto;
+
+	opacity: .8;
+
+	-webkit-transition: opacity .6s;
+	-moz-transition: opacity .6s;
+	-o-transition: opacity .6s;
+	-ms-transition: opacity .6s;
+	transition: opacity .6s;
+
+
+}
+
+.gs-w {
+border: 1px dotted #B2B2B2;
+}
+
+.wrapper {
+
+	width:680px;
+	position:relative;
+	margin:auto;
+	text-align:center;
+}
+
+
+.add-block-wrapper{
+
+
+
+}
+.freeze-block,
+.addBlock {
+	margin-top: 50px !important;
+	margin:auto;
+	position: relative;
+	display: block;
+	font-size: 70px !important;
+	cursor: pointer;
+	width:80px;
+	color:gray;
+}
+
+.freeze-block:hover,
+.addBlock:hover {
+	color:black;
+}
+
+
+.locked,
+.locked:hover 
+{
+	color: #E6E6E6;
+	cursor:default;
+}	
+
+
+
+.placeholder-box {
+	border: 2px dotted #E6E6E6;
+
+	margin-top: 50px;
+	margin-bottom:50px;
+	padding-top:20px;
+	text-align:center;
+	font-size: 96px;
+	vertical-align: middle;
+	height: 160px
+}
+
+.cancel-box {
+	position: absolute;
+	color:#424242;
+	right: 15px;
+	top: 15px;
+}
+
+.color-box {
+	position: absolute;
+	color:#424242;
+	right: 40px;
+	top: 15px;
+}
+
+.color-box:hover,
+.cancel-box:hover{
+	color: gray;
+}
+
+.button-wrapper {
+	position: relative;
+ 	margin-top: 30px;
+ 	margin-left: 65px;
+}
+
+.selector-box {
+	border: 3px dotted #D8D8D8;
+	display:block;
+	position: relative;
+	float:left;
+	color:gray;
+	margin-right: 40px;
+	width:64px !important;
+	height:64px !important;
+	font-size:50px;
+	border-radius:50px;
+	text-align: center;
+	font-weight: bold;
+	padding: 6px 3px 0 3px;
+
+}
+
+
+.selector-box:hover {
+	border: 3px dotted gray;
+	color:gray;
+	cursor: pointer;
+}
+
+
+
+.gridster .gs-w {
+	background: #E6E6E6;
+	cursor: pointer;
+}
+
+.gridster .player {
+	background: #BBB;
+}
+
+
+.gridster .preview-holder {
+	border: none!important;
+	background: gray!important;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.no-hover {
+	cursor:default !important;
+}
+

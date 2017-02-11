@@ -1,0 +1,32 @@
+body {
+background-color:white;
+overflow:hidden;	
+}
+
+#rootElement {
+	
+width:800px;
+height:800px;
+margin-top: 0px;
+margin-left:0px;
+background-color:white;
+text-align: center;
+z-index:1;
+position:absolute
+}
+
+.wrapper {
+margin-top:250px;
+width:800px;
+position:relative;
+margin:auto;
+}
+
+.sub-wrapper {
+margin-top:100px;
+width:800px;
+height:800px;
+position:relative;
+background-color:white;
+border-radius:400px;
+}
