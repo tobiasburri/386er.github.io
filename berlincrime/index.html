@@ -36,7 +36,7 @@ xmlns:fb="http://www.facebook.com/2008/fbml">
 	<script type="text/javascript" src="/libraries/OpenLayers.js"></script> 
 	<script type="text/javascript" src="/libraries/jquery.jscrollpane.min.js"></script> <!-- ScrollBar -->
 	<script type="text/javascript" src="/libraries/jquery.mousewheel.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="./style.css">
 
 	
 	<script>
@@ -163,7 +163,7 @@ $(document).ready(function(){
 						strategies: [new OpenLayers.Strategy.Fixed()],
 						styleMap: styleMap,
 						protocol: new OpenLayers.Protocol.HTTP({
-							url: "berlin",
+							url: "./berlin",
 							format: new OpenLayers.Format.KML({
 								extractStyles: false,
 								extractAttributes: true			 
