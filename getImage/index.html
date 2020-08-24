@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+
+.loader {
+  border: 8px solid darkgray;
+  border-top: 8px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin:auto;
+  margin-top:10%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+</style>
+
+<body>
+
+<h1>Hi there</h1>
+<p>Select a theme!</p>
+
+<select name="theme" id="theme">
+    <option value="sailboat">Sailboat</option>
+    <option value="skull">Skull</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit" id='submit'>
+  <div id='imagesection'></div>
+  
+
+
+</body>
+
+<script>
+
+var isLoading = false;
+
+$('#submit').click(function() {
+
+	if  (isLoading == false ) {
+
+		var theme = $('#theme').val()
+
+	
+		isLoading = true
+		getLoader('')
+
+		$.ajax({
+
+			url : 'https://21rzukwv7a.execute-api.eu-central-1.amazonaws.com/test/transactions?theme=' + theme,
+			type : 'GET',
+			dataType:'json',
+			success : function(data) {              
+				
+				var imageUrl = data['locations']['thumbnail']
+				$('#imagesection').empty().append('<img src="' + imageUrl + '" >')
+				isLoading = false;
+				
+			},
+			error : function(request,error)
+			{
+				console.log("Request: "+JSON.stringify(request));
+				isLoading = false;
+			}
+		});
+
+	}
+
+})
+
+
+var getLoader = function(string) {
+	$("#imagesection").empty().append('<div class="loader"></div>', '<div id="loader-text">' + string + '</br> </div>' );
+}
+
+
+
+
+</script>
+
+
+</html>
