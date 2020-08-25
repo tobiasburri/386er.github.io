@@ -26,6 +26,7 @@ function Controller() {
 		that.bindTrashButton();
 		that.bindChooseButton();
 		that.bindSelectButton();
+		that.bindBrandButton();
 	}
 	
 	
@@ -47,6 +48,8 @@ function Controller() {
 	    $( ".selector" ).off();
 	    $('#back').off();
 	    $(".shirt-wrapper").off();
+		$('#logo').off();
+		
 	}
 	
 	that.bindTrashButton = function() {
@@ -119,14 +122,14 @@ function Controller() {
 	    $(".shirt-wrapper").click( function() {
 
             $(".shirt-wrapper").off();
-            $(".shirt-type").css({"color":"black"});
+            $(".shirt-type").css({"color":"white"});
 
 	        var id =  $(this).attr("id");
 
 	        if (id == "single") {
 
 
-
+	
 				$("#multi").remove();
 				$('<div class="size-select" onclick="" >S</div><div class="size-select" onclick="" >M</div><div class="size-select" onclick="" >L</div><div class="size-select" onclick="">XL</div>').insertAfter("#single")
                 $(".size-select").css(sizeStyle);
@@ -153,7 +156,7 @@ function Controller() {
 	that.addSingleImage = function(svg) {
 
 		
-        var styles = {"position": "absolute", "width": "3em", "height": "3em", "top":"0px", "left":"0px", "fill":"black important", "z-index":"10000"};
+        var styles = {"position": "absolute", "width": "3em", "height": "3em", "top":"0px", "left":"0px", "fill":"white important", "z-index":"10000"};
 	    $('#single').append('<div id="singleShirt"></div>');
 	    
 		$('#singleShirt').css({"position": "absolute", "width": "75px", "height": "75px", "top":"75px", "left":"160px"}).append(svg);
@@ -162,11 +165,11 @@ function Controller() {
 
 	    $('#single').find(".svg-icon").css(styles);
 
-        var styles2 = {"fill": "black"}
+        var styles2 = {"fill": "white"}
         $('#single').find(".svg-icon").find("path").css(styles2)
         $('#single').find(".svg-icon").find("polygon").css(styles2)
         $('#single').find(".svg-icon").find("rect").css(styles2)
-		$('#single').find(".svg-icon").find("circle").css({"stroke": "black", "stroke-width": "1"})
+		$('#single').find(".svg-icon").find("circle").css({"stroke": "white", "stroke-width": "1"})
 		
 	}
 	
@@ -183,7 +186,7 @@ function Controller() {
 
 	    
 		var gridheight = 8
-		var gridwidth = 10
+		var gridwidth = 11
 		var i, j;
 		
 		for (i = 0; i < gridheight; i++) {
@@ -207,11 +210,11 @@ function Controller() {
 				
 				
 				
-				var styles2 = {"fill": "black"}
+				var styles2 = {"fill": "white"}
 				$('#' + id).find('#' + svgId).find("path").css(styles2)
 				$('#' + id).find('#' + svgId).find("polygon").css(styles2)
 				$('#' + id).find('#' + svgId).find("rect").css(styles2)
-				$('#' + id).find('#' + svgId).find("circle").css({"stroke": "black", "stroke-width": "1"})
+				$('#' + id).find('#' + svgId).find("circle").css({"stroke": "white", "stroke-width": "1"})
 				
 			}
 		}
@@ -222,7 +225,7 @@ function Controller() {
 
 
 	that.getLoader = function(string) {
-		$("#image-section").empty().append('<div class="loader"></div>', '<div id="loader-text">' + string + '</br> (Fancy Animation)</div>' );
+		$("#image-section").empty().append('<div class="loader"></div>', '<div id="loader-text">' + string + '</div>' );
 	}
 
 
@@ -232,14 +235,16 @@ function Controller() {
 
                     that.getLoader("Generating Image");
 
+
                     $(".selector-image").css("display","none")
                     that.startLoading();
+	
 
                     setTimeout(function() {
 
                         var styles = {"width": "23.5em", "height": "23.5em", "margin-left":"0px", "margin-top":"0px"};
 
-
+							
                         $("#image-section").empty().append(that.selectedImageSVG);
                         $("#image-section").find(".svg-icon").css(styles);
                         that.stopLoading();
@@ -256,11 +261,23 @@ function Controller() {
 		
 		$(".size-select").click(function() {
 			
-			$("#shirt-section").empty().append("<p style='color:white; font-family:Roboto; font-size:22px'>Shirt is moved to Card and can be ordered / payed.</p>")
+			$("#shirt-section").empty().append("<p style='color:black; font-family:Roboto; font-size:22px'>Shirt is moved to Card and can be ordered / paid.</p>")
 			
 			
 		})
 		
+		
+	}
+	
+	that.bindBrandButton = function() {
+		
+		
+		$('.logo').click(function() {
+							
+						
+					    that.render();
+
+					})
 		
 	}
 

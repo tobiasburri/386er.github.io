@@ -12,56 +12,63 @@ body {min-height:100%; padding:0; margin:0;}
 
 .table {display:table; width:100%; height:100%;}
 .row {display:table-row;}
-.cell {display:table-cell;}
+.cell {display:table-cell; border-bottom:0.5px solid gray}
 
 .middle {background-color:whitesmoke; height:100%;}
-.top {background-color:black; height:70px; color:white}
-.bottom {background-color:black; height:100px; color:white}
+.top {background-color:white; height:70px; color:black;}
+.bottom {background-color:white; height:150px; color:black}
 .container {padding:10px;}
 
 
 
 
-.logo {position: relative; float:left; height:50px; width:200px;10px;font-family:Roboto; font-size:32px; left:60px; top:15px}
+.logo {position: relative; float:left; height:50px; width:200px;10px;font-family:Roboto; font-size:36px; font-weight:500; left:60px; top:15px}
 .icon-wrapper {position: relative; float:right; height:100%; width:100px; right:50px;}
-#search {position: relative;float:left;height:30%;width:20%;color:white;left:15%;top:35%; fill:white}
-#cart {position: relative;float:right;height:30%;width:20%;right:15%;top:35%; fill:white}
+.social-media-wrapper {position: relative; float:left; height:100%; left:60px; width:100px;}
+
+#search {position: relative;float:left;height:30%;width:20%;color:black;left:15%;top:35%; fill:black}
+#cart {position: relative;float:right;height:30%;width:20%;right:15%;top:35%; fill:black}
 
 
 
-#middle-column {width:80%; height:100%; margin:auto; background-color:black; margin-top:0px;}
-#shirt-section {width:380px; height:100%; margin:auto; border:1px solid red; color:white; font-family:Roboto}
-#greetings {width:100%; height:100px; border: 1px solid red; fill=white; color:white; text-align:center;font-family:Roboto;}
+#middle-column {width:80%; height:100%; margin:auto; background-color:whitesmoke; margin-top:0px;}
+#shirt-section {width:380px; height:100%; margin:auto; color:black; font-family:Roboto; background-color:white; border: 1px solid gray;}
+#greetings {width:100%; height:120px; fill=black; color:black; text-align:center;font-family:Roboto;}
 
-#selector-wrapper {width:100%; height:122px; border: 1px solid red; fill=white; color:white}
-.selector {display: inline-block; width:120px; height:120px; vertical-align:top; border:1px solid red;}
-.selector:hover {border:1px solid gray;}
+#selector-wrapper {width:100%; height:122px; fill=white; color:white}
+.selector {display: inline-block; width:100px; height:100px;border:1px solid white; vertical-align:top;margin-left:12px; border-radius:100px;}
+.selector:hover {border:1px solid white; background-color:gray;}
 
-#image-section {width:100%; height:400px; border: 1px solid red; fill=white; color:white}
+#image-section {width:100%; height:400px; fill=black; color:black}
 
-#choose-image {width:100%; height:100px; border: 1px solid red; fill=white; color:white}
-.selector-image {display: none; width: 48%; height:60px; vertical-align:top; border:1px solid red; font-family:Roboto; }
+#choose-image {width:100%; height:100px; fill=black; color:black}
+.selector-image {display:none; width: 48%; height:60px; vertical-align:top;font-family:Roboto; margin-left:2px; border:1px solid white;}
 .selector-image:hover {border:1px solid gray;}
+.selector-image-text {float:right; width:100px; margin-top:22px;}
 
-.payment-wrapper {position: relative; float:left; height:50px; width:400px;font-family:Roboto; font-size:32px; left:50px; top:25px;   border:1px solid red;}
-ul {display: inline-table; list-style: none; margin: 0px; border:1px solid red;}
+.payment-wrapper {position: relative; float:left; height:40px; width:400px;font-family:Roboto; font-size:32px; left:60px; top:25px; margin-right:20px}
+ul {display: inline-table; list-style: none; margin: 0px; padding: 5px 20px 0px 20px; border:1px solid gray; background-color:whitesmoke;}
 li {float:left; margin-right:5px;}
 
 
 
-.svg-icon {width: 4em;height: 4em; margin-left:30px; margin-top:30px}
+.svg-icon {width: 4em;height: 4em; margin-left:19px; margin-top:17px}
 .svg-icon path,
 .svg-icon polygon,
-.svg-icon rect {fill: white;}
-.svg-icon circle {stroke: white;stroke-width: 1;}
+.svg-icon rect {fill: black;}
+.svg-icon circle {stroke: black;stroke-width: 1;}
 
-.svg-icon-store {width: 3em;height: 3em; margin-right:20px; margin-left: 10px}
+.svg-icon-store {width: 2.5em;height:2.5em; margin-left: 20px; margin-top:10px}
 .svg-icon-store path,
 .svg-icon-store polygon,
-.svg-icon-store rect {fill: white;}
-.svg-icon-store circle {stroke: white;stroke-width: 1;}
+.svg-icon-store rect {fill: black;}
+.svg-icon-store circle {stroke: black;stroke-width: 1;}
 
-
+.svg-icon-social {width: 1.7em;height: 1.7em; margin-left: 10px; margin-top:25px;}
+.svg-icon-social path,
+.svg-icon-social polygon,
+.svg-icon-social rect {fill: black;}
+.svg-icon-social circle {stroke: black;stroke-width: 1;}
 
 
 
@@ -69,13 +76,14 @@ li {float:left; margin-right:5px;}
 
 .loader {
   border: 8px solid darkgray;
-  border-top: 8px solid white;
+  border-top: 8px solid black;
   border-radius: 50%;
   width: 40px;
   height: 40px;
   animation: spin 2s linear infinite;
   margin:auto;
-  margin-top:40%;
+  position:relative;
+  top:120px;
 }
 
 @keyframes spin {
@@ -83,12 +91,12 @@ li {float:left; margin-right:5px;}
   100% { transform: rotate(360deg); }
 }
 
-#loader-text {text-align: center; border: 1px solid red; font-family: Roboto;}
+#loader-text {text-align: center; position:relative; font-family: Roboto; color:black; top:130px;}
 
-#back{height: 100%; width:100%;}
+#back{height: 100%; width:100%; border:1px solid white;}
 #back:hover {border:1px solid gray;}
 
-.shirt-wrapper {width: 80%; height 200px; border:1px solid red; position:relative; margin:auto; margin-bottom:20px; margin-top:10px;}
+.shirt-wrapper {width: 80%; height 200px; border:1px solid red; position:relative; margin:auto; margin-bottom:10px; margin-top:29px; padding:10px;}
 .shirt-wrapper:hover { border:1px solid gray};
 
 .size-select:hover { border:1px solid gray}
@@ -114,16 +122,18 @@ li {float:left; margin-right:5px;}
         <div class="table">
             
 			
-			<div class="top row">
+			<div class="top row" id="header">
                 <div class="cell">
 				
-					<div class="logo">  Brandname       </div>
+					<div class="logo" onclick="" style="cursor: pointer;">  Brandname       </div>
+					<div class="social-media-wrapper">
+					<div id="instagram">
+					<svg class="svg-icon-social" viewBox="0 0 20 20"><path fill="none" d="M14.52,2.469H5.482c-1.664,0-3.013,1.349-3.013,3.013v9.038c0,1.662,1.349,3.012,3.013,3.012h9.038c1.662,0,3.012-1.35,3.012-3.012V5.482C17.531,3.818,16.182,2.469,14.52,2.469 M13.012,4.729h2.26v2.259h-2.26V4.729z M10,6.988c1.664,0,3.012,1.349,3.012,3.012c0,1.664-1.348,3.013-3.012,3.013c-1.664,0-3.012-1.349-3.012-3.013C6.988,8.336,8.336,6.988,10,6.988 M16.025,14.52c0,0.831-0.676,1.506-1.506,1.506H5.482c-0.831,0-1.507-0.675-1.507-1.506V9.247h1.583C5.516,9.494,5.482,9.743,5.482,10c0,2.497,2.023,4.52,4.518,4.52c2.494,0,4.52-2.022,4.52-4.52c0-0.257-0.035-0.506-0.076-0.753h1.582V14.52z"></path></svg>
+					<svg class="svg-icon-social" viewBox="0 0 20 20"><path fill="none" d="M11.344,5.71c0-0.73,0.074-1.122,1.199-1.122h1.502V1.871h-2.404c-2.886,0-3.903,1.36-3.903,3.646v1.765h-1.8V10h1.8v8.128h3.601V10h2.403l0.32-2.718h-2.724L11.344,5.71z"></path></svg>
+					</div>
+					</div>
 						
 					<div class="icon-wrapper"> 
-					
-						<div id="search">
-							<svg aria-hidden="true" focusable="false" role="presentation" class="icons" viewBox="0 0 37 40"><path d="M35.6 36l-9.8-9.8c4.1-5.4 3.6-13.2-1.3-18.1-5.4-5.4-14.2-5.4-19.7 0-5.4 5.4-5.4 14.2 0 19.7 2.6 2.6 6.1 4.1 9.8 4.1 3 0 5.9-1 8.3-2.8l9.8 9.8c.4.4.9.6 1.4.6s1-.2 1.4-.6c.9-.9.9-2.1.1-2.9zm-20.9-8.2c-2.6 0-5.1-1-7-2.9-3.9-3.9-3.9-10.1 0-14C9.6 9 12.2 8 14.7 8s5.1 1 7 2.9c3.9 3.9 3.9 10.1 0 14-1.9 1.9-4.4 2.9-7 2.9z"></path></svg>
-						</div>
 						<div id="cart">
 							<svg aria-hidden="true" focusable="false" role="presentation" class="icons" viewBox="0 0 37 40"><path d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path></svg>
 						</div>

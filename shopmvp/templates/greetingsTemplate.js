@@ -1,9 +1,8 @@
 var greetingsTemplate = `
 	</br>
-	GREETINGS </br>
-	Here will be an introductionary text </br>
+	<div style="margin:auto; margin-top:0px; border-bottom:1px solid gray; width:150px; color:black; font-family:Roboto; font-weight: bold; font-size:30px"> Greetings </div> 
 	</br>
-	Select your Design
+	create your design
 `;
 
 
