@@ -6,7 +6,7 @@ var bodyTemplate = `
 
         </div>
 
-        <div id="selector-wrapper">
+        <div id="selector-section">
 
         </div>
 

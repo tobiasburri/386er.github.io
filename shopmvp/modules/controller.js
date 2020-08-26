@@ -20,7 +20,7 @@ function Controller() {
 
 		that.body.append(bodyTemplate);
 		$("#greetings").append(greetingsTemplate);
-		$("#selector-wrapper").append(categoriesTemplate);
+		$("#selector-section").append(categoriesTemplate);
 		$("#choose-image").append(chooseTemplate);
 		
 		that.bindTrashButton();
@@ -235,18 +235,17 @@ function Controller() {
 
                     that.getLoader("Generating Image");
 
-
                     $(".selector-image").css("display","none")
                     that.startLoading();
-	
 
                     setTimeout(function() {
 
-                        var styles = {"width": "23.5em", "height": "23.5em", "margin-left":"0px", "margin-top":"0px"};
+                        var styles = {"width": "20em", "height": "20em", "margin-left":"90px", "margin-top":"35px"};
 
-							
-                        $("#image-section").empty().append(that.selectedImageSVG);
-                        $("#image-section").find(".svg-icon").css(styles);
+
+                        $("#image-section").empty().append("<div id='image-wrapper'></div>")
+						$("#image-wrapper").append(that.selectedImageSVG);
+                        $("#image-wrapper").find(".svg-icon").css(styles);
                         that.stopLoading();
 
 
