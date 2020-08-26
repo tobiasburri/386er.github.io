@@ -156,10 +156,10 @@ function Controller() {
 	that.addSingleImage = function(svg) {
 
 		
-        var styles = {"position": "absolute", "width": "3em", "height": "3em", "top":"0px", "left":"0px", "fill":"white important", "z-index":"10000"};
+        var styles = {"position": "absolute", "width": "2.5em", "height": "2.5em", "top":"0px", "left":"0px", "fill":"white important", "z-index":"10000"};
 	    $('#single').append('<div id="singleShirt"></div>');
 	    
-		$('#singleShirt').css({"position": "absolute", "width": "75px", "height": "75px", "top":"75px", "left":"160px"}).append(svg);
+		$('#singleShirt').css({"position": "absolute", "width": "75px", "height": "75px", "top":"45px", "left":"70px"}).append(svg);
 	        
 			
 
