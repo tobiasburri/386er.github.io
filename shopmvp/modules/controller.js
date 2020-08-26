@@ -195,10 +195,9 @@ function Controller() {
 				
 				
 				
-				
 				var id = "multiShirt" + i.toString() + "_" + j.toString();
 				var svgId = "svg" + id
-				var tops = (2 + 32*i).toString() +"px"
+				var tops = ( 30*i).toString() +"px"
 				var lefts = (20 + 27*j).toString() +"px"
 				
 				$('#multi').append('<div id="' + id + '"></div>');
@@ -279,6 +278,19 @@ function Controller() {
 					})
 		
 	}
+	
+	
+	that.refreshCSS = function(objectReference) {
+			
+		var $ed = $(objectReference)
+		var $style = $('#styles')
+		  
+		$ed.val($style.html());
+	}
+		
+		
+		
+	
 
 
 	

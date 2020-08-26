@@ -1,0 +1,19 @@
+{
+	"variant_ids": [4017],
+	"format": "jpg",
+	"files": [{
+			"placement": "front",
+			"image_url": "https://image-bucket-scrawl.s3.eu-central-1.amazonaws.com/sailboat/1598458306/single.png",
+			"position": {
+				"area_width": 1200,
+				"area_height": 1200,
+				"width": 700,
+				"height": 700,
+				"top": 50,
+				"left": 600
+			}
+		}
+
+
+	]
+}
