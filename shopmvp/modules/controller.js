@@ -5,6 +5,7 @@ function Controller() {
     that.selectedImageSVG = "";
 	that.body = "";
 	that.isLoading = false;
+	that.theme = "";
 
 	that.initialize = function() {
 	
@@ -66,7 +67,7 @@ function Controller() {
 		
 		$( ".selector" ).click(function() {
 			
-			that.selectedImageSVG = $(this).html()
+			that.theme = $(this).data('value');
 			
             that.loadImage();
 		
@@ -256,28 +257,39 @@ function Controller() {
 
         if (that.isLoading == false) {
 
-                    that.getLoader("generating image");
+			that.getLoader("generating image");
 
-                    $(".selector-image").css("display","none")
-                    that.startLoading();
+			$(".selector-image").css("display","none")
+			that.startLoading();
 
-                    setTimeout(function() {
+			var image_style = {"width":"300px", "margin-left":"100px", "margin-top":"25px", "height":"300px", "fill":"black", "color":"black"}
+			
+			$.ajax({
 
-                        var styles = {"width": "20em", "height": "20em", "margin-left":"90px", "margin-top":"35px"};
-
-
-                        $("#image-section").empty().append("<div id='image-wrapper'></div>")
-						$("#image-wrapper").append(that.selectedImageSVG);
-                        $("#image-wrapper").find(".svg-icon").css(styles);
-                        that.stopLoading();
-
-
-                        $(".selector-image").css("display","inline-block")
-
-                    },1200);
-                }
-
+				url : 'https://21rzukwv7a.execute-api.eu-central-1.amazonaws.com/test/transactions?theme=' + that.theme,
+				type : 'GET',
+				dataType:'json',
+				success : function(data) {              
+					
+					var imageUrl = data['locations']['blackThumbnail']
+					$("#image-section").empty().append("<div id='image-wrapper'></div>")
+					$("#image-wrapper").append('<img id="image-thumbnail" src="' + imageUrl + '" >');
+					$("#image-thumbnail").css(image_style);
+					that.stopLoading();
+					$(".selector-image").css("display","inline-block")
+					
+				},
+				error : function(request,error)
+				{
+					console.log("Request: "+JSON.stringify(request));
+					isLoading = false;
+					that.stopLoading();
+				}
+			});					
+		}
     };
+	
+	
 	
 	that.bindSizeButton = function() {
 		
