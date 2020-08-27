@@ -6,6 +6,14 @@ function Controller() {
 	that.body = "";
 	that.isLoading = false;
 	that.theme = "";
+	
+	that.single = "";
+	that.pattern = "";
+	that.thumbnail = "";
+	that.blackSingle = "";
+	that.blackPattern =  "";
+	that.blackThumbnail = "";
+	
 
 	that.initialize = function() {
 	
@@ -80,10 +88,6 @@ function Controller() {
 		$( ".choose" ).click(function() {
 
 
-            var selectedSVG = $("#image-section").find(".svg-icon")[0];
-			var svgInner = $("#image-section").find(".svg-icon")[0].innerHTML;
-		
-		
 		
 
 			$( ".selector-image" ).empty()
@@ -97,9 +101,10 @@ function Controller() {
 
 
                    that.body.empty().append(shirtTemplate)
-                   console.log(selectedSVG)
-                   that.addSingleImage(selectedSVG)
-				   that.addMultipleImages(svgInner)
+         
+                   that.addSingleImage()
+				   
+				   that.addMultipleImages();
 				   that.bindShirtButton();
 
 
@@ -178,24 +183,11 @@ function Controller() {
 	}
 
 
-	that.addSingleImage = function(svg) {
+	that.addSingleImage = function() {
 
-		
-        var styles = {"position": "absolute", "width": "2.5em", "height": "2.5em", "top":"0px", "left":"0px", "fill":"white important", "z-index":"10000"};
-	    $('#single').append('<div id="singleShirt"></div>');
-	    
-		$('#singleShirt').css({"position": "absolute", "width": "75px", "height": "75px", "top":"45px", "left":"70px"}).append(svg);
-	        
-			
-
-	    $('#single').find(".svg-icon").css(styles);
-
-        var styles2 = {"fill": "white"}
-        $('#single').find(".svg-icon").find("path").css(styles2)
-        $('#single').find(".svg-icon").find("polygon").css(styles2)
-        $('#single').find(".svg-icon").find("rect").css(styles2)
-		$('#single').find(".svg-icon").find("circle").css({"stroke": "white", "stroke-width": "1"})
-		
+		var image_style = {"width":"50px", "left":"150px","top":"55px", "height":"50px", "position":"absolute"}
+	    $('#single').append('<img id="image-single" src="' + that.single + '" >');
+		$("#image-single").css(image_style);		
 	}
 	
 	
@@ -205,44 +197,12 @@ function Controller() {
 	that.addMultipleImages = function(svg) {
 
 
-		var svgoutside = '<svg class="svg-icon" viewBox="0 0 20 20"></svg>'
+		var image_style = {"width":"270px", "left":"0px","top":"0px", "height":"270px", "position":"absolute"}
+	    $('#multi').append('<img id="image-multi" src="' + that.pattern + '" >');
+		$("#image-multi").css(image_style);	
 
-        var styles = {"position": "absolute", "width": "0.8em", "height": "0.8em", "top":"0px", "left":"0px", "fill":"black important", "z-index":"10000"};
 
-	    
-		var gridheight = 8
-		var gridwidth = 10
-		var i, j;
-		
-		for (i = 0; i < gridheight; i++) {
-			for (j = 0; j < gridwidth; j++) {
-	
-				
-				
-				
-				var id = "multiShirt" + i.toString() + "_" + j.toString();
-				var svgId = "svg" + id
-				var tops = ( 30*i).toString() +"px"
-				var lefts = (20 + 27*j).toString() +"px"
-				
-				$('#multi').append('<div id="' + id + '"></div>');
-				$('#' + id ).css({"position": "absolute", "width": "15px", "height": "15px", "top": tops, "left": lefts});
-				
-				
-				
-				$('#' + id ).append('<svg id="'+ svgId +'" viewBox="0 0 20 20"> ' + svg +'</svg>')
-				
-				
-				
-				var styles2 = {"fill": "white"}
-				$('#' + id).find('#' + svgId).find("path").css(styles2)
-				$('#' + id).find('#' + svgId).find("polygon").css(styles2)
-				$('#' + id).find('#' + svgId).find("rect").css(styles2)
-				$('#' + id).find('#' + svgId).find("circle").css({"stroke": "white", "stroke-width": "1"})
-				
-			}
-		}
-	    
+
 	}
 
 	
@@ -270,10 +230,17 @@ function Controller() {
 				type : 'GET',
 				dataType:'json',
 				success : function(data) {              
+								
+					that.single = data['locations']['single'];
+					that.pattern = data['locations']['pattern'];
+					that.thumbnail = data['locations']['thumbnail'];
+					that.blackSingle = data['locations']['blackSingle'];
+					that.blackPattern =  data['locations']['blackPattern'];
+					that.blackThumbnail = data['locations']['blackThumbnail'];
 					
-					var imageUrl = data['locations']['blackThumbnail']
+
 					$("#image-section").empty().append("<div id='image-wrapper'></div>")
-					$("#image-wrapper").append('<img id="image-thumbnail" src="' + imageUrl + '" >');
+					$("#image-wrapper").append('<img id="image-thumbnail" src="' + that.blackThumbnail + '" >');
 					$("#image-thumbnail").css(image_style);
 					that.stopLoading();
 					$(".selector-image").css("display","inline-block")
