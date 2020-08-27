@@ -89,7 +89,7 @@ function Controller() {
 			$( ".selector" ).empty()
 			$( "#greetings").empty()
 			
-			that.getLoader("Loading Selection");
+			that.getLoader("loading selection");
 
 			
 			setTimeout(function() {
@@ -119,12 +119,35 @@ function Controller() {
         var sizeStyle = { "width": "50px", "height": "50px", "border":"1px solid red", "float": "left", "margin":"20px", "margin-left":"20px", "margin-top":"155px", "margin-bottom":"50px",  "text-align":"center", "cursor": "pointer"};
 
 
-	    $(".shirt-wrapper").click( function() {
+	    $(".shirt-container").click( function() {
 
-            $(".shirt-wrapper").off();
-            $(".shirt-type").css({"color":"white"});
-
+            $(".shirt-container").off();
+     
 	        var id =  $(this).attr("id");
+			
+			
+			$( "#shirt-section" ).empty().append('<div class="loader"></div>', '<div id="loader-text">' + "loading shirt" + '</div>' );
+			
+		
+			setTimeout(function() {
+
+
+                  that.body.empty().append(sizeTemplate)
+				  
+				  that.bindSizeButton()
+				  
+				  $('#back').click(function() {
+
+					    that.render();
+
+					})
+				  
+					
+			},1200);
+			
+			
+			
+			/*
 
 	        if (id == "single") {
 
@@ -143,9 +166,10 @@ function Controller() {
 
 	        }
 			
-			that.bindSizeButton()
+			
 
-	        
+			
+	        */
 
 	    })
 
@@ -186,7 +210,7 @@ function Controller() {
 
 	    
 		var gridheight = 8
-		var gridwidth = 11
+		var gridwidth = 10
 		var i, j;
 		
 		for (i = 0; i < gridheight; i++) {
@@ -232,7 +256,7 @@ function Controller() {
 
         if (that.isLoading == false) {
 
-                    that.getLoader("Generating Image");
+                    that.getLoader("generating image");
 
                     $(".selector-image").css("display","none")
                     that.startLoading();
@@ -257,7 +281,7 @@ function Controller() {
 	
 	that.bindSizeButton = function() {
 		
-		$(".size-select").click(function() {
+		$(".size-move-card").click(function() {
 			
 			$("#shirt-section").empty().append("<p style='color:black; font-family:Roboto; font-size:22px'>Shirt is moved to Card and can be ordered / paid.</p>")
 			
@@ -280,15 +304,6 @@ function Controller() {
 	}
 	
 	
-	that.refreshCSS = function(objectReference) {
-			
-		var $ed = $(objectReference)
-		var $style = $('#styles')
-		  
-		$ed.val($style.html());
-	}
-		
-		
 		
 	
 
