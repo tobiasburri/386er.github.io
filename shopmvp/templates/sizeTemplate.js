@@ -74,6 +74,7 @@ var sizeTemplate =`
 		<div id="back">
 		
 			<p class="backp" onclick="" style="text-align: center; width:60px;padding:5px; position:relative;top:35; margin:auto;cursor: pointer;"> back </p>
+			
 		</div>
 		
 	</div>

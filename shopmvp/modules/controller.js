@@ -36,6 +36,7 @@ function Controller() {
 		that.bindChooseButton();
 		that.bindSelectButton();
 		that.bindBrandButton();
+		that.bindLinkButton();
 	}
 	
 	
@@ -62,6 +63,19 @@ function Controller() {
 		
 		
 	}
+	
+	
+	that.bindLinkButton = function() {
+		
+		$('.footer-link').click(function() {
+			
+			$("#shirt-section").empty().append("<p style='color:black; font-family:Roboto; font-size:28px'>" + $(this).html() + "</p>")			
+			
+		})
+		
+	}
+	
+	
 	
 	that.bindTrashButton = function() {
 		
