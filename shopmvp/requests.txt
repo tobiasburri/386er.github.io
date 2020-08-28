@@ -1,6 +1,7 @@
 {
 	"variant_ids": [4017],
 	"format": "jpg",
+	"option_groups": ["Wrinkled","On Hanger"]
 	"files": [{
 			"placement": "front",
 			"image_url": "https://image-bucket-scrawl.s3.eu-central-1.amazonaws.com/sailboat/1598458306/single.png",
@@ -17,3 +18,30 @@
 
 	]
 }
+
+
+{
+	"variant_ids": [4013],
+	"format": "png",
+	"option_groups": ["Wrinkled","Women's Lifestyle 2","Men's Lifestyle 3"],
+	"files": [{
+			"placement": "front",
+			"image_url": "https://s3-eu-central-1.amazonaws.com/image-bucket-scrawl/palmtree/1598565506/blackSingle.png",
+			"position": {
+				"area_width": 1200,
+				"area_height": 1200,
+				"width": 700,
+				"height": 700,
+				"top": 50,
+				"left": 600
+			}
+		}
+
+
+	]
+}
+
+
+base64.b64encode(b'6obotimt-3836-0lrr:ahpd-fxb9zvqusiwj')
+Nm9ib3RpbXQtMzgzNi0wbHJyOmFocGQtZnhiOXp2cXVzaXdq
+

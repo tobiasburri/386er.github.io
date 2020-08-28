@@ -57,7 +57,9 @@ function Controller() {
 	    $( ".selector" ).off();
 	    $('#back').off();
 	    $(".shirt-wrapper").off();
-		$('#logo').off();
+		$('.logo').off();
+		$('.logosmall').off();
+		
 		
 	}
 	
@@ -133,7 +135,7 @@ function Controller() {
 			
 			
 			$( "#shirt-section" ).empty().append('<div class="loader"></div>', '<div id="loader-text">' + "loading shirt" + '</div>' );
-			
+					
 		
 			setTimeout(function() {
 
@@ -151,32 +153,6 @@ function Controller() {
 					
 			},1200);
 			
-			
-			
-			/*
-
-	        if (id == "single") {
-
-
-	
-				$("#multi").remove();
-				$('<div class="size-select" onclick="" >S</div><div class="size-select" onclick="" >M</div><div class="size-select" onclick="" >L</div><div class="size-select" onclick="">XL</div>').insertAfter("#single")
-                $(".size-select").css(sizeStyle);
-
-	        } else {
-
-
-	            $("#single").remove()
-				$('<div class="size-select">S</div><div class="size-select">M</div><div class="size-select">L</div><div class="size-select">XL</div>').insertAfter("#multi")
-                $(".size-select").css(sizeStyle);
-
-	        }
-			
-			
-
-			
-	        */
-
 	    })
 
 
@@ -279,13 +255,18 @@ function Controller() {
 					    that.render();
 
 					})
+					
+		$('.logosmall').click(function() {
+							
+						
+					    that.render();
+
+					})
 		
 	}
 	
 	
 		
-	
-
 
 	
 	return that;

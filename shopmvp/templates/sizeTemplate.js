@@ -18,7 +18,7 @@ var sizeTemplate =`
 			
 			<p style="text-align:left;width:60px; margin-left:28px; font-weight:bold; font-size:22px; padding:5px;"> XXX &euro;</p>
 			
-			<ul>
+			<ul style="list-style-type:none";>
 			  </br>
 			  <li>sadipscing elitr, sed diam nonumy</li>
 			  </br>

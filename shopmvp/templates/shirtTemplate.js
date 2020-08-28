@@ -14,9 +14,9 @@ var shirtTemplate =`
 		
 		<div class="shirt-description" style="width:286px; position:relative; float:right;">
 		
-		<p style="text-align:left;width:50px; margin-left:22px; border-bottom:1px solid gray; padding:5px;">single</p>
+		<p style="text-align:left;width:50px; margin-left:22px; border-bottom:1px solid gray; padding:5px;font-weight:bold">single</p>
 		
-		<ul>
+		<ul style="list-style-type:none";>
 		  </br>
 		  <li>Lorem ipsum dolor sit amet, consetetur</li>
 		  </br>
@@ -37,9 +37,9 @@ var shirtTemplate =`
 
 		<div class="shirt-description" style="width:286px; position:relative; float:left;">
 		
-		<p style="text-align:left;width:55px; margin-left:22px; border-bottom:1px solid gray; padding:5px;">pattern</p>
+		<p style="text-align:left;width:55px; margin-left:22px; border-bottom:1px solid gray; padding:5px;font-weight:bold">pattern</p>
 		
-		<ul>
+		<ul style="list-style-type:none";>
 		  </br>
 		  <li>Lorem ipsum dolor sit amet, consetetur</li>
 		  </br>
