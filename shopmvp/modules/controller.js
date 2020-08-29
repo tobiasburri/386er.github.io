@@ -175,23 +175,18 @@ function Controller() {
 
 	that.addSingleImage = function() {
 
-		var image_style = {"width":"50px", "left":"150px","top":"55px", "height":"50px", "position":"absolute"}
-	    $('#single').append('<img id="image-single" src="' + that.single + '" >');
+		var image_style = {"width":"55px", "left":"165px","top":"100px", "height":"55px", "position":"absolute"}
+	    $('#single').append('<img id="image-single" src="' + that.blackThumbnail + '" >');
 		$("#image-single").css(image_style);		
 	}
 	
-	
-
-	
-	
+		
 	that.addMultipleImages = function(svg) {
 
 
 		var image_style = {"width":"270px", "left":"0px","top":"0px", "height":"270px", "position":"absolute"}
-	    $('#multi').append('<img id="image-multi" src="' + that.pattern + '" >');
+	    $('#multi').append('<img id="image-multi" src="' + that.blackPattern + '" >');
 		$("#image-multi").css(image_style);	
-
-
 
 	}
 
