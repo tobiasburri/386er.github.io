@@ -10,9 +10,8 @@ function Controller() {
 	that.single = "";
 	that.pattern = "";
 	that.thumbnail = "";
-	that.blackSingle = "";
-	that.blackPattern =  "";
-	that.blackThumbnail = "";
+	that.patternThumbnail = "";
+
 	
 
 	that.initialize = function() {
@@ -176,7 +175,7 @@ function Controller() {
 	that.addSingleImage = function() {
 
 		var image_style = {"width":"55px", "left":"165px","top":"100px", "height":"55px", "position":"absolute"}
-	    $('#single').append('<img id="image-single" src="' + that.blackThumbnail + '" >');
+	    $('#single').append('<img id="image-single" src="' + that.thumbnail + '" >');
 		$("#image-single").css(image_style);		
 	}
 	
@@ -184,8 +183,9 @@ function Controller() {
 	that.addMultipleImages = function(svg) {
 
 
-		var image_style = {"width":"270px", "left":"0px","top":"0px", "height":"270px", "position":"absolute"}
-	    $('#multi').append('<img id="image-multi" src="' + that.blackPattern + '" >');
+		var image_style = {"width":"260px", "left":"37px","top":"35px", "height":"260px", "position":"absolute"}
+	    //$('#multi').append('<img id="image-multi" src="' + that.blackPattern + '" >');
+		$('#multi').append('<img id="image-multi" src="' + that.patternThumbnail + '" >');
 		$("#image-multi").css(image_style);	
 
 	}
@@ -219,13 +219,12 @@ function Controller() {
 					that.single = data['locations']['single'];
 					that.pattern = data['locations']['pattern'];
 					that.thumbnail = data['locations']['thumbnail'];
-					that.blackSingle = data['locations']['blackSingle'];
-					that.blackPattern =  data['locations']['blackPattern'];
-					that.blackThumbnail = data['locations']['blackThumbnail'];
+					that.patternThumbnail = data['locations']['patternThumbnail'];
+					
 					
 
 					$("#image-section").empty().append("<div id='image-wrapper'></div>")
-					$("#image-wrapper").append('<img id="image-thumbnail" src="' + that.blackThumbnail + '" >');
+					$("#image-wrapper").append('<img id="image-thumbnail" src="' + that.thumbnail + '" >');
 					$("#image-thumbnail").css(image_style);
 					that.stopLoading();
 					$(".selector-image").css("display","inline-block")
