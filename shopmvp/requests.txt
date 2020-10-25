@@ -45,3 +45,35 @@
 base64.b64encode(b'6obotimt-3836-0lrr:ahpd-fxb9zvqusiwj')
 Nm9ib3RpbXQtMzgzNi0wbHJyOmFocGQtZnhiOXp2cXVzaXdq
 
+
+
+
+
+
+
+
+
+
+
+{
+"variant_ids": [8854],
+"format": "png",
+"option_groups": ["Flat"],
+"product_options": ["stitch_color","White"],
+"files": [
+{
+"placement": "default",
+"image_url": "https://s3-eu-central-1.amazonaws.com/image-bucket-scrawl/palmtree/1598566557/pattern.png",
+"position": {
+"area_width": 4200,
+"area_height": 5400,
+"width": 4200,
+"height": 5400,
+"top": 0,
+"left": 0
+}
+}
+]
+}
+
+

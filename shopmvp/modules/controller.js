@@ -245,8 +245,14 @@ function Controller() {
 	that.bindSizeButton = function() {
 		
 		$(".size-move-card").click(function() {
-			
-			$("#shirt-section").empty().append("<p style='color:black; font-family:Roboto; font-size:22px'>Shirt is moved to Card and can be ordered / paid.</p>")
+
+			$("#shirt-section").empty().append(addressTemplate);
+
+			$('#back').click(function() {
+
+					    that.render();
+
+			})
 			
 			
 		})
