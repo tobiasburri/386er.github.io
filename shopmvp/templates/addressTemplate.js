@@ -21,7 +21,7 @@ var addressTemplate =`
                 <!-- name input-->
                 <div class="control-group">
                     <label class="control-label">First name</label>
-                    <label class="control-label" style="margin-left:178px;">Last name</label>
+                    <label class="control-label" style="margin-left:175px;">Last name</label>
                     <div class="controls">
                         <input id="first-name" name="first-name" type="text" placeholder="first name"
                         class="input-xsmall">
@@ -42,7 +42,7 @@ var addressTemplate =`
                 <!-- postal-code input-->
                 <div class="control-group">
                     <label class="control-label">Zip / Postal Code</label>
-                    <label class="control-label"  style="margin-left:137px;">City</label>
+                    <label class="control-label"  style="margin-left:130px;">City</label>
                     <div class="controls">
                         <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code"
                         class="input-xsmall">
@@ -83,7 +83,7 @@ var addressTemplate =`
 
 <div id="back">
 
-    <p class="backp" onclick="" style="text-align: center; width:60px;padding:5px; position:relative;top:103; margin:auto;cursor: pointer;"> back </p>
+    <p class="backp" onclick="" style="text-align: center; width:60px;padding:5px; position:relative;top:99; margin:auto;cursor: pointer;"> back </p>
 
 </div>
 	
