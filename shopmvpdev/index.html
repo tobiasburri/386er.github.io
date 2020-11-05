@@ -1,0 +1,296 @@
+<html>
+
+<head>
+
+
+<style id="styles">
+
+html, 
+body {min-height:100%; padding:0; margin:0;}
+
+#wrapper {position:absolute; top:0; bottom:0; left:0; right:0;}
+
+.table {display:table; width:100%; height:100%;}
+.row {display:table-row;}
+.cell {display:table-cell; border-bottom:0.5px solid white}
+
+.middle {background-color:white; height:100%;}
+.top {background-color:white; height:70px; color:black;}
+.bottom {background-color:whitesmoke; height:200px; color:black; border: 1px solid gray !important}
+.container {padding:10px;}
+
+
+
+
+.logo {position: relative; float:left; height:50px; width:200px;font-family:Roboto; font-size:40px; font-weight:900; left:60px; top:15px}
+.logosmall {position: relative; height:35px; width:200px;font-family:Roboto; font-size:24px; font-weight:900;}
+.icon-wrapper {position: relative; float:right; height:100%; width:100px; right:50px;}
+.social-media-wrapper {position: relative; height:60px; width:100px;}
+.bottom-box-left {position: relative; height:100%; width:300px;  float:left;}
+.bottom-box-right {position: relative; height:100%; width:450px; float:right;}
+
+
+#search {position: relative;float:left;height:30%;width:20%;color:black;left:15%;top:35%; fill:black}
+#cart {position: relative;float:right;height:30%;width:20%;right:15%;top:35%; fill:black}
+
+
+
+#middle-column {width:80%; height:100%; margin:auto; background-color:white; margin-top:0px;}
+#shirt-section {width:900px; height: 744px; margin:auto; color:black; font-family:Roboto; background-color:white; border: 1px solid whites; border-top: 1px solid gray; }
+#greetings {width:100%; height:120px; fill=black; color:black; text-align:center;font-family:Roboto;}
+#greetingsTESt {width:100%; height:120px; fill=black; color:black; text-align:center;font-family:Amatic SC, cursive;}
+#greetingstext {margin:auto; margin-top:0px; border-bottom:1px solid gray; width:150px; color:black; font-family:Amatic SC, cursive; font-weight: bold; font-size:25px; padding:5px}
+
+#selector-section {width:100%; height:122px; fill=white; color:white}
+#selector-wrapper {width:450px; margin:auto; height:122px; fill=white; color:white}
+.selector {display: inline-block; width:100px; height:100px;border:1px solid white; vertical-align:top;margin-left:35px; margin-top:10px; border-radius:100px;}
+.selector:hover {border:1px solid gray;}
+
+.selected-image {width:70px; height:70px; margin:15px;}
+
+
+#image-section {width:100%; height:400px; fill=black; color:black}
+#image-wrapper {width:500px; margin:auto; height:400px; fill=black; color:black}
+#image-thumbnail {width:300px; margin-left:100px; height:300px; fill=black; color:black}
+
+.shirt-blocker {height:70px;}
+.shirt-wrapper {width: 620px; border:1px solid white; position:relative; margin:auto; padding:10px; height:228px;}
+.shirt-container {width:280px; position:relative;}
+
+.size-blocker {height:70px;}
+.size-wrapper {width: 720px; border:1px solid whitesmoke; position:relative; margin:auto; padding:10px; height:340px;}
+.size-container {width:380px; position:relative;}
+.size-select {width:200px; position:relative;}
+.size-box {height:70px; width:740px; margin:auto;}
+.size-gallery-select {width: 370; margin: 10px; height: 50px; position: relative; float: left;}
+.size-gallery-preview {border:1px solid gray; height:40px; width:40px; margin:5px; margin-left:40px; position: relative; float: left;}
+.size-move-card {width: 150px; position: relative; float: right;  margin: 10px; height: 50px; margin-right:70px; border:1px solid white; cursor: pointer; font-weight:bold; font-size:20px;}
+.size-move-card:hover {border-bottom:1px solid gray;}
+
+
+
+.backp {border: 1px solid white;}
+.backp:hover {border-bottom:1px solid gray;}
+
+
+
+#choose-image {width:100%; height:100px; fill=black; color:black}
+#choose-wrapper {width:400px; margin:auto; height:100px; fill=black; color:black}
+.selector-image {display:none; width: 48%; height:60px; vertical-align:top;font-family:Roboto; margin-left:2px; border:1px solid white;}
+.selector-image:hover {border-bottom:1px solid gray;}
+.selector-image-text {float:right; width:100px; margin-top:22px;}
+
+.payment-wrapper {position: relative; float:left; height:40px; width:400px;font-family:Roboto; font-size:32px; left:60px; top:25px; margin-right:20px}
+ul.payment-ul {display: inline-table; list-style: none; margin: 0px; padding: 5px 20px 0px 20px; border:1px solid gray; background-color:whitesmoke;}
+li{padding:2px;}
+
+#bottom-wrapper {width: 900px; margin:auto; height: 100%; position: relative}
+
+
+
+
+
+.svg-icon {width: 4em;height: 4em; margin-left:19px; margin-top:17px}
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {fill: black;}
+.svg-icon circle {stroke: black;stroke-width: 1;}
+
+.svg-icon-store {width: 2.5em;height:2.5em; margin-left: 20px; margin-top:10px}
+.svg-icon-store path,
+.svg-icon-store polygon,
+.svg-icon-store rect {fill: black;}
+.svg-icon-store circle {stroke: black;stroke-width: 1;}
+
+.svg-icon-social {width: 1.3em;height: 1.3em; margin-left: 5px; margin-top:5px;}
+.svg-icon-social path,
+.svg-icon-social polygon,
+.svg-icon-social rect {fill: black;}
+.svg-icon-social circle {stroke: black;stroke-width: 1;}
+
+
+
+
+
+.loader {
+  border: 8px solid darkgray;
+  border-top: 8px solid black;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin:auto;
+  position:relative;
+  top:120px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loader-text {text-align: center; position:relative; font-family: Roboto; color:black; top:130px; font-size:16px;}
+
+#back{height: 100%; width:100%; border:1px solid white; font-weight:bold;}
+
+.size-select.select:active {border:0px solid white;}
+
+
+.control-label {font-size: 15px;font-weight: bold; width: 450px;}
+.controls {margin-bottom:15px;}
+.input-xlarge {width:490px; height:35px; border:1px solid whitesmoke;}
+.input-xsmall {width:245px; height:35px; border:1px solid whitesmoke;}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="modules/controller.js"></script>
+<script src="templates/greetingsTemplate.js"></script>
+<script src="templates/categoriesTemplate.js"></script>
+<script src="templates/chooseTemplate.js"></script>
+<script src="templates/bodyTemplate.js"></script>
+<script src="templates/shirtTemplate.js"></script>
+<script src="templates/sizeTemplate.js"></script>
+<script src="templates/addressTemplate.js"></script>
+
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+ <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div class="table">
+            
+			
+			<div class="top row" id="header">
+                <div class="cell">
+				
+					<div class="logo" onclick="" style="cursor: pointer;">  brandname       </div>
+					
+						
+					<div class="icon-wrapper"> 
+						<div id="cart">
+							<svg aria-hidden="true" focusable="false" role="presentation" class="icons" viewBox="0 0 37 40"><path d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path></svg>
+						</div>
+					
+					</div>
+					
+				</div>
+				
+            </div>
+			
+			
+			
+		
+            <div class="middle row">
+			
+                <div class="container cell">
+				
+                    <div id="middle-column">
+
+
+					</div>
+					
+                </div>
+				
+            </div>
+			
+			
+			
+            <div class="bottom row">
+                <div class="cell">
+					
+				
+					
+					<div id="bottom-wrapper">
+					
+						<div class="bottom-box-left">
+						
+						
+							<div class="logosmall" onclick="" style="cursor: pointer;">  brandname     </div>
+						
+							<div class="social-media-wrapper">
+								<div id="instagram">
+									<svg class="svg-icon-social" viewBox="0 0 20 20"><path fill="none" d="M14.52,2.469H5.482c-1.664,0-3.013,1.349-3.013,3.013v9.038c0,1.662,1.349,3.012,3.013,3.012h9.038c1.662,0,3.012-1.35,3.012-3.012V5.482C17.531,3.818,16.182,2.469,14.52,2.469 M13.012,4.729h2.26v2.259h-2.26V4.729z M10,6.988c1.664,0,3.012,1.349,3.012,3.012c0,1.664-1.348,3.013-3.012,3.013c-1.664,0-3.012-1.349-3.012-3.013C6.988,8.336,8.336,6.988,10,6.988 M16.025,14.52c0,0.831-0.676,1.506-1.506,1.506H5.482c-0.831,0-1.507-0.675-1.507-1.506V9.247h1.583C5.516,9.494,5.482,9.743,5.482,10c0,2.497,2.023,4.52,4.518,4.52c2.494,0,4.52-2.022,4.52-4.52c0-0.257-0.035-0.506-0.076-0.753h1.582V14.52z"></path></svg>
+									<svg class="svg-icon-social" viewBox="0 0 20 20"><path fill="none" d="M11.344,5.71c0-0.73,0.074-1.122,1.199-1.122h1.502V1.871h-2.404c-2.886,0-3.903,1.36-3.903,3.646v1.765h-1.8V10h1.8v8.128h3.601V10h2.403l0.32-2.718h-2.724L11.344,5.71z"></path></svg>
+								</div>
+							</div>
+						
+						
+						
+						
+						</div>
+					
+					
+						
+					
+						<div class="bottom-box-right">
+												
+							<span>
+							   <ul style="display: inline-block; zoom:1; *display: inline; _height: 30px; font-family:Roboto; font-size:12px;list-style-type:none">
+								  <li class="footer-link" style="cursor: pointer" onclick="">imprint</li>
+						
+								  <li class="footer-link" style="cursor: pointer" onclick="">payment</li>
+					
+								  <li class="footer-link" style="cursor: pointer" onclick="">shipment & return policy</li>
+								  
+							   </ul>
+
+							   <ul style="display: inline-block;zoom:1; *display: inline; _height: 30px;font-family:Roboto;font-size:12px;list-style-type:none";>
+								  <li>info@brandname.com</li>
+						
+								  <li class="footer-link" style="cursor: pointer" onclick="">about</li>
+					
+								  <li class="footer-link" style="cursor: pointer" onclick="">contact</li>
+							   </ul>
+							<span>
+						
+						</div>
+						
+					
+					</div>
+					
+
+					
+					
+				</div>
+            </div>
+			
+			
+			
+        </div>
+    </div>
+
+
+<script>
+
+	$( document ).ready(function() {
+	
+		var controller = new Controller();
+		controller.initialize();
+		
+		controller.render();	
+
+			
+	})
+	 
+</script>
+	
+	
+
+	
+	
+	
+</body>
+
+
+	
+
+</html>
+
+
+
