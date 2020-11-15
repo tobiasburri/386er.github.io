@@ -118,6 +118,8 @@ function Controller() {
 
 				url : 'https://kd772qjid4.execute-api.eu-central-1.amazonaws.com/test/patternthumbnail?theme=' + that.theme + '&image-id=' + that.imageId,				
 				type : 'GET',
+				headers: {'x-api-key': 'U7dpIlN35Z21raUsRhpPw3lFAziLqGJE3Hax5jzM'},
+				//headers: {'x-api-key': 'U7dpIlN35Z21raUsRhpPw33Hax5jzg'},
 				dataType:'json',
 				success : function(data) {              
 								
