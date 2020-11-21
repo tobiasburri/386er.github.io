@@ -116,10 +116,10 @@ function Controller() {
 			
 			$.ajax({
 
-				url : 'https://kd772qjid4.execute-api.eu-central-1.amazonaws.com/test/patternthumbnail?theme=' + that.theme + '&image-id=' + that.imageId,				
-				type : 'GET',
+				url : 'https://kd772qjid4.execute-api.eu-central-1.amazonaws.com/test/patternthumbnail',				
+				type : 'POST',
 				headers: {'x-api-key': 'U7dpIlN35Z21raUsRhpPw3lFAziLqGJE3Hax5jzM'},
-				//headers: {'x-api-key': 'U7dpIlN35Z21raUsRhpPw33Hax5jzg'},
+				data : JSON.stringify({'theme': that.theme, 'image-id': that.imageId}),
 				dataType:'json',
 				success : function(data) {              
 								
@@ -202,7 +202,6 @@ function Controller() {
 
 
 		var image_style = {"width":"260px", "left":"37px","top":"35px", "height":"260px", "position":"absolute"}
-	    //$('#multi').append('<img id="image-multi" src="' + that.blackPattern + '" >');
 		$('#multi').append('<img id="image-multi" src="' + that.patternThumbnail + '" >');
 		$("#image-multi").css(image_style);	
 
@@ -231,17 +230,14 @@ function Controller() {
 
 				url : 'https://kd772qjid4.execute-api.eu-central-1.amazonaws.com/test/thumbnail?theme=' + that.theme,				
 				type : 'GET',
+				headers: {'x-api-key': 'U7dpIlN35Z21raUsRhpPw3lFAziLqGJE3Hax5jzM'},
 				dataType:'json',
 				success : function(data) {              
 								
-					//that.single = data['locations']['single'];
-					//that.pattern = data['locations']['pattern'];
 					that.thumbnail = data['locations']['thumbnail'];
 					that.imageId = data['image-id']
-					//that.patternThumbnail = data['locations']['patternThumbnail'];
-					
-					
 
+					
 					$("#image-section").empty().append("<div id='image-wrapper'></div>")
 					$("#image-wrapper").append('<img id="image-thumbnail" src="' + that.thumbnail + '" >');
 					$("#image-thumbnail").css(image_style);
