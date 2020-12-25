@@ -262,11 +262,11 @@ function Controller() {
 		$(".size-move-card").click(function() {
 
 			$("#shirt-section").empty().append(addressTemplate);
-
+			that.bindProceedButton()
+			
 			$('#back').click(function() {
 
 					    that.render();
-
 			})
 			
 			
@@ -274,6 +274,9 @@ function Controller() {
 		
 		
 	}
+	
+	
+	
 	
 	that.bindBrandButton = function() {
 		
@@ -292,6 +295,45 @@ function Controller() {
 
 					})
 		
+	}
+	
+	
+		that.bindProceedButton = function() {
+		
+		
+		$('.proceed').click(function() {
+							
+			var inputFields = $('.row').find('input')
+			
+			for (var i = 0; i < inputFields.length; i++) {
+				
+				field = inputFields[i]
+				fieldName = field.name
+				fieldValue = field.value
+				
+				if (fieldValue == "" && fieldName !== "region" ) {
+				
+					console.log(field.name + " is empty!")
+					$(field).prop('required',true)
+				}	
+			}
+			
+			var selectField = $('.row').find('select')[0]
+			var selectFieldValue = selectField.value
+			var selectFieldName = selectField.name
+			
+			if (selectFieldValue == "") {
+			
+				console.log(field.name + " is empty!")
+				$(selectField).prop('required',true)
+			}
+			
+			
+			
+			
+						
+		})
+						
 	}
 	
 	
