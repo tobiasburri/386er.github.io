@@ -37,6 +37,18 @@ function Controller() {
 		that.bindSelectButton();
 		that.bindBrandButton();
 		that.bindLinkButton();
+		that.bindSlick();
+	}
+	
+	
+	that.bindSlick = function() {
+		
+		$('#selector-wrapper').slick({
+  infinite: true,
+  slidesToShow: 2,
+  slidesToScroll: 2
+});
+		
 	}
 	
 	

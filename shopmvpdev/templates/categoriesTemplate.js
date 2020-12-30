@@ -19,6 +19,12 @@ var categoriesTemplate =`
 	
 	</div>
 	
+	<div class="selector diamond" data-value="diamond" onclick="" style="cursor: pointer;">
+		
+		<img class="selected-image" src="./images/skull.svg">
+	
+	</div>
+	
 	</div>
 	
 `
