@@ -75,7 +75,7 @@ var addressTemplate =`
 	</div>
 </div>
 
-<div class="size-move-card" style="margin-right:130px;">
+<div class="size-move-card proceed" style="margin-right:130px;">
 
 		<p style="text-align:center"> proceed</p>
 
