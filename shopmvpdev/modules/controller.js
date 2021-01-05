@@ -37,18 +37,28 @@ function Controller() {
 		that.bindSelectButton();
 		that.bindBrandButton();
 		that.bindLinkButton();
-		that.bindSlick();
+		that.bindGlider();
 	}
 	
 	
-	that.bindSlick = function() {
+	that.bindGlider = function() {
 		
-		$('#selector-wrapper').slick({
-  infinite: true,
-  slidesToShow: 2,
-  slidesToScroll: 2
+
+		
+
+new Glider(document.querySelector('.glider'), {
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  draggable: true,
+  dots: '.dots',
+  arrows: {
+    prev: '.glider-prev',
+    next: '.glider-next'
+  }
 });
-		
+
+
+	
 	}
 	
 	

@@ -1,7 +1,7 @@
 <html>
 
 <head>
-
+<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
 
 <style id="styles">
 
@@ -42,11 +42,12 @@ body {min-height:100%; padding:0; margin:0;}
 #greetingstext {margin:auto; margin-top:0px; border-bottom:1px solid gray; width:150px; color:black; font-family:Amatic SC, cursive; font-weight: bold; font-size:25px; padding:5px}
 
 #selector-section {width:100%; height:122px; fill=white; color:white}
-#selector-wrapper {width:450px; margin:auto; height:122px; fill=white; color:white}
-.selector {display: inline-block; width:100px; height:100px;border:1px solid white; vertical-align:top;margin-left:35px; margin-top:10px; border-radius:100px;}
-.selector:hover {border:1px solid gray;}
+#selector-wrapper {width:450px; margin:auto; height:122px; fill=white; color:white; position:relative}
+.selector {display: inline-block; width:100px; height:100px; vertical-align:top;margin-left:35px; margin-top:10px; }
 
-.selected-image {width:70px; height:70px; margin:15px;}
+
+.selected-image {width:70px; height:70px; border:1px solid white;border-radius:100px; padding:10px;}
+.selected-image:hover {border:1px solid gray;}
 
 
 #image-section {width:100%; height:400px; fill=black; color:black}
@@ -174,8 +175,8 @@ select:invalid {
 
  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
- <script type="text/javascript" src="../libraries/slick/slick.min.js"></script>
- <link rel="stylesheet" type="text/css" href="../libraries/slick/slick.css"/>
+ <script type="text/javascript" src="./glider.js"></script>
+ <link rel="stylesheet" type="text/css" href="./glider.css"/>
 
 
 
