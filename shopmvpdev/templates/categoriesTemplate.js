@@ -15,8 +15,8 @@ var categoriesTemplate =`
   <div class="selector diamond" data-value="diamond" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/diamond.svg"></div>
 </div>
 
-	<button aria-label="Previous" class="glider-prev">«</button>
-	<button aria-label="Next" class="glider-next">»</button>
+	<button aria-label="Previous" class="glider-prev"><img class="select-button" src="./images/left.svg"></button>
+	<button aria-label="Next" class="glider-next"><img class="select-button" src="./images/right.svg"></button>
 	<div role="tablist" class="dots"></div>
 	
 </div>

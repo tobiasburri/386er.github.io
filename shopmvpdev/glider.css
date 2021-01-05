@@ -61,8 +61,7 @@
   color: #666;
   opacity: 1;
   line-height: 1;
-  transition: opacity .5s cubic-bezier(.17,.67,.83,.67),
-              color .5s cubic-bezier(.17,.67,.83,.67);
+
 }
 .glider-prev:hover,
 .glider-next:hover,
@@ -106,14 +105,14 @@
   color: #ccc;
   border-radius: 999px;
   background: #ccc;
-  width: 12px;
-  height: 12px;
-  margin: 7px;
+  width: 7px;
+  height: 7px;
+  margin: 12px;
 }
 .glider-dot:hover,
 .glider-dot:focus,
 .glider-dot.active {
-  background: #a89cc8;
+  background: black;
 }
 @media(max-width: 36em){
   .glider::-webkit-scrollbar {

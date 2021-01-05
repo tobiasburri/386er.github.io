@@ -75,6 +75,7 @@ new Glider(document.querySelector('.glider'), {
 
 
 	that.unbindAll = function() {
+		that.theme = "";
 	    $( ".trash" ).off();
 	    $( ".choose" ).off();
 	    $( ".selector" ).off();
@@ -111,7 +112,34 @@ new Glider(document.querySelector('.glider'), {
 
 	that.bindSelectButton = function() {
 		
+		$( ".selector" ).mouseover(function() {
+			
+			$(this).find('img').css( "border", "1px solid gray" );
+
+	    })
+		
+		
+		$( ".selector" ).mouseout(function() {
+			
+			var dataValue = $(this).data()['value'];
+			
+			if (dataValue != that.theme) {
+				console.log(dataValue)
+				console.log(that.theme)
+			
+				$(this).find('img').css( "border", "1px solid white" );
+
+			}
+	
+	    })
+		
+		
+		
 		$( ".selector" ).click(function() {
+			
+			
+			$(".selector").find('img').css( "border", "1px solid white" );
+			$(this).find('img').css( "border", "1px solid gray" );
 			
 			that.theme = $(this).data('value');
 			
@@ -131,6 +159,11 @@ new Glider(document.querySelector('.glider'), {
 			$( ".selector-image" ).empty()
 			$( ".selector" ).empty()
 			$( "#greetings").empty()
+			$( ".glider" ).empty()
+			$( ".glider-next" ).empty()
+			$( ".glider-prev" ).empty()
+			$( ".glider-dots" ).empty()
+			
 			
 			that.getLoader("loading selection");
 
