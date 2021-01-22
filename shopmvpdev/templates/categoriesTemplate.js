@@ -13,6 +13,10 @@ var categoriesTemplate =`
   <div class="selector diamond" data-value="diamond" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/diamond.svg"></div>
   <div class="selector brain" data-value="brain" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/brain.svg"></div>
   <div class="selector star" data-value="star" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/star.svg"></div>
+  <div class="selector crown" data-value="crown" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/crown.svg"></div>
+  <div class="selector wristwatch" data-value="wristwatch" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/wristwatch.svg"></div>
+  <div class="selector necklace" data-value="necklace" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/necklace.svg"></div>
+  
 </div>
 
 	<button aria-label="Previous" class="glider-prev"><img class="select-button" src="./images/left.svg"></button>
