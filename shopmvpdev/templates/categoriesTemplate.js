@@ -16,6 +16,12 @@ var categoriesTemplate =`
   <div class="selector crown" data-value="crown" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/crown.svg"></div>
   <div class="selector wristwatch" data-value="wristwatch" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/wristwatch.svg"></div>
   <div class="selector necklace" data-value="necklace" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/necklace.svg"></div>
+  <div class="selector snowflake" data-value="snowflake" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/snowflake.svg"></div>
+  <div class="selector flower" data-value="flower" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/flower.svg"></div>
+  <div class="selector sun" data-value="sun" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/sun.svg"></div>
+  <div class="selector tshirt" data-value="tshirt" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/tshirt.svg"></div>
+  <div class="selector sun" data-value="wineglass" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/sun.svg"></div>
+  <div class="selector sun" data-value="winebottle" onclick="" style="cursor: pointer;">	<img class="selected-image" src="./images/sun.svg"></div>
   
 </div>
 

@@ -19,6 +19,75 @@
 	]
 }
 
+                "id": 11868 # XXL
+                "id": 11866 # L
+                "id": 11865 # M
+                "id": 11864 # S
+                "id": 11867 # XL
+
+
+
+# PRODUCT ID 456
+
+
+
+
+
+{
+	"variant_ids": [11867],
+	"format": "jpg",
+	"option_groups": ["Flat"],
+	"files": [{
+			"placement": "front",
+			"image_url": "https://s3-eu-central-1.amazonaws.com/image-bucket-scrawlai/palmtree/bTLKFGez/palmtree_bTLKFGez_thumbnail.png",
+			"position": {
+				"area_width": 3600,
+				"area_height": 4800,
+				"width": 1400,
+				"height": 1400,
+				"top": 800,
+				"left": 2200
+			}
+		}
+
+
+	]
+}
+
+
+{
+	"variant_ids": [11867],
+	"format": "jpg",
+	"option_groups": ["Flat"],
+	"files": [{
+			"placement": "front",
+			"image_url": "https://s3-eu-central-1.amazonaws.com/image-bucket-scrawlai/skull/XpILpAIk/skull_XpILpAIk_patternThumbnail.png",
+			"position": {
+				"area_width": 3600,
+				"area_height": 4800,
+				"width": 3600,
+				"height": 4800,
+				"top": 0,
+				"left": 0
+			}
+		}
+
+
+	]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {
 "variant_ids": [8854],
@@ -64,6 +133,31 @@
 }
 ]
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
