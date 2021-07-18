@@ -171,14 +171,14 @@ new Glider(document.querySelector('.glider'), {
 			
 			$.ajax({
 
-				url : 'https://kd772qjid4.execute-api.eu-central-1.amazonaws.com/test/patternthumbnail',				
+				url : 'https://v1cnpq84sk.execute-api.eu-west-2.amazonaws.com/test/pattern-thumbnail',				
 				type : 'POST',
-				headers: {'x-api-key': 'U7dpIlN35Z21raUsRhpPw3lFAziLqGJE3Hax5jzM'},
+				headers: {'x-api-key': '75ZVw8ez5a65NQtq7xHYw7eOObeRNGQo5dWtRWg2'},
 				data : JSON.stringify({'theme': that.theme, 'image-id': that.imageId}),
 				dataType:'json',
 				success : function(data) {              
 								
-					that.patternThumbnail = data['locations']['patternThumbnail'];
+					that.patternThumbnail = data['locations']['pattern-thumbnail'];
 
 					that.body.empty().append(shirtTemplate)
          
@@ -283,9 +283,9 @@ new Glider(document.querySelector('.glider'), {
 			
 			$.ajax({
 
-				url : 'https://kd772qjid4.execute-api.eu-central-1.amazonaws.com/test/thumbnail?theme=' + that.theme,				
+				url : 'https://v1cnpq84sk.execute-api.eu-west-2.amazonaws.com/test/thumbnail?theme=' + that.theme,				
 				type : 'GET',
-				headers: {'x-api-key': 'U7dpIlN35Z21raUsRhpPw3lFAziLqGJE3Hax5jzM'},
+				headers: {'x-api-key': '75ZVw8ez5a65NQtq7xHYw7eOObeRNGQo5dWtRWg2'},
 				dataType:'json',
 				success : function(data) {              
 								
